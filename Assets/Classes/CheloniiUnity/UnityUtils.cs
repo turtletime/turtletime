@@ -8,24 +8,33 @@ namespace CheloniiUnity
     /// </summary>
     static class UnityUtils
     {
-        public static void CreateMesh(GameObject gameObject, string meshName, string matName)
+        public static void CreateMesh(GameObject gameObject, string fileName, string meshName, string matName)
         {
             MeshFilter filter = gameObject.AddComponent<MeshFilter>();
             MeshRenderer renderer = gameObject.AddComponent<MeshRenderer>();
-            filter.mesh = Resources.Load<Mesh>(meshName);
-            renderer.material = Resources.Load<Material>("Materials/" + matName);
+            Mesh[] meshes = Resources.LoadAll<Mesh>("Models/" + fileName);
+            foreach (Mesh m in meshes)
+            {
+                if (m.name.Equals(meshName))
+                {
+                    filter.mesh = m;
+                    break;
+                }
+            }
+            filter.transform.localRotation = Quaternion.identity;
+            renderer.material = Resources.Load<Material>("Models/Materials/" + matName);
         }
 
         public static void CreateImage(GameObject gameObject, string spriteName)
         {
             Image image = gameObject.AddComponent<Image>();
-            image.sprite = Resources.Load<Sprite>(spriteName);
+            image.sprite = Resources.Load<Sprite>("Images/" + spriteName);
         }
 
         public static void CreateSprite(GameObject gameObject, string spriteName)
         {
             SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>(spriteName);
+            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
         }
 
         public static void CreateText(GameObject gameObject, string font, int fontSize, TextAnchor alignment = TextAnchor.MiddleCenter)

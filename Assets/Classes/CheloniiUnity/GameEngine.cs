@@ -31,6 +31,7 @@ namespace CheloniiUnity
             moduleList.Add(module);
             moduleMap.Add(module.ModuleKey, module);
             module.SetGameObject(worldObject, uiObject);
+            module.Load();
         }
 
         public void Update(float dt)

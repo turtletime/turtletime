@@ -10,7 +10,7 @@ namespace TurtleTime
     {
         public override void Initialize()
         {
-            // nothing
+            AddModule(new EnvironmentModule());
         }
     }
 }

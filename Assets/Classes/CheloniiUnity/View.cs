@@ -11,9 +11,9 @@ namespace CheloniiUnity
     /// Any models referenced in this class MUST be treated as read-only.
     /// </summary>
     /// <typeparam name="Model">The type of state class from which this View should read state.</typeparam>
-    abstract class View<Model> : IViewable
+    abstract class View<Module> : IViewable where Module : GameModule
     {
-        public Model Module { get; set; }
+        public Module GameModule { get; set; }
         protected GameObject gameObject = new GameObject();
 
         public abstract ViewType GameObjectType { get; }

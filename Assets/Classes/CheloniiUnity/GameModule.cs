@@ -33,13 +33,13 @@ namespace CheloniiUnity
 
         protected void AddController<T>(Controller<T> controller) where T : GameModule
         {
-            controller.Module = (T)this;
+            controller.GameModule = (T)this;
             controllers.Add(controller);
         }
 
         protected void AddView<T>(View<T> view) where T : GameModule
         {
-            view.Module = (T)this;
+            view.GameModule = (T)this;
             if (view.GameObjectType == ViewType.WORLD)
             {
                 view.SetParent(worldObject);

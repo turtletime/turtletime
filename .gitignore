@@ -30,3 +30,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+# Blender Backup Files
+*.blend1
+*.blend2
+*.blend1.meta
+*.blend2.meta

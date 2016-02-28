@@ -11,6 +11,8 @@ namespace TurtleTime
     /// </summary>
     class EnvironmentModule : GameModule
     {
+        Models.RoomModel roomModel;
+
         public override GameModuleKey ModuleKey
         {
             get
@@ -21,7 +23,11 @@ namespace TurtleTime
 
         public override void Load()
         {
-            
+            // Models
+            roomModel = new Models.RoomModel("cafe_room");
+            // Views
+            AddView(new Views.RoomFloorView());
+            AddView(new Views.RoomWallsView());
         }
 
         public override void ReceiveData(GameModule other)
