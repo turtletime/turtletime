@@ -12,7 +12,7 @@ namespace CheloniiUnity
     /// </summary>
     abstract class GameEngine
     {
-        private Dictionary<GameModuleKey, GameModule> moduleMap = new Dictionary<GameModuleKey, GameModule>();
+        private Dictionary<Type, GameModule> moduleMap = new Dictionary<Type, GameModule>();
         private List<GameModule> moduleList = new List<GameModule>();
 
         private GameObject worldObject;
@@ -26,12 +26,18 @@ namespace CheloniiUnity
 
         public abstract void Initialize();
 
-        public void AddModule(GameModule module)
+        protected void AddModule(GameModule module)
         {
             moduleList.Add(module);
-            moduleMap.Add(module.ModuleKey, module);
+            moduleMap.Add(module.GetType(), module);
             module.SetGameObject(worldObject, uiObject);
+            module.Engine = this;
             module.Load();
+        }
+
+        public T GetModule<T>() where T : GameModule
+        {
+            return moduleMap[typeof(T)] as T;
         }
 
         public void Update(float dt)

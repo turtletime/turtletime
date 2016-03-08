@@ -10,22 +10,22 @@ public class UnityInterface : MonoBehaviour
     GameObject ui;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         world = new GameObject("3D Node");
         ui = new GameObject("UI Node");
         world.transform.parent = gameObject.transform;
-        world.transform.Rotate(new Vector3(270,180,0));
+        world.transform.Rotate(new Vector3(270, 180, 0));
         ui.transform.parent = gameObject.transform;
         ui.AddComponent<Canvas>();
         ui.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
         engine.SetGameObjects(world, ui);
         engine.Initialize();
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
         engine.Update(DELTA_TIME);
-	}
+    }
 }

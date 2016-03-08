@@ -8,6 +8,11 @@ namespace CheloniiUnity
     /// </summary>
     static class UnityUtils
     {
+        public static void CreateCamera(GameObject gameObject)
+        {
+            gameObject.AddComponent<Camera>();
+        }
+
         public static void CreateMesh(GameObject gameObject, string fileName, string meshName, string matName)
         {
             MeshFilter filter = gameObject.AddComponent<MeshFilter>();
@@ -22,7 +27,15 @@ namespace CheloniiUnity
                 }
             }
             filter.transform.localRotation = Quaternion.identity;
-            renderer.material = Resources.Load<Material>("Models/Materials/" + matName);
+            Material material = Resources.Load<Material>("Models/Materials/" + matName);
+            if (material != null)
+            {
+                renderer.material = material;
+            }
+            else
+            {
+                renderer.material = Resources.Load<Material>("Models/Materials/default");
+            }
         }
 
         public static void CreateImage(GameObject gameObject, string spriteName)

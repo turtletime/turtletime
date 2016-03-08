@@ -13,5 +13,12 @@ namespace CheloniiUnity
         /// </summary>
         /// <param name="jsonNode">The parsed JSON node from which Model data should be loaded.</param>
         public virtual void LoadFromJson(JSONNode jsonNode) { }
+
+        public static T LoadFromJson<T>(JSONNode jsonNode) where T : Model, new()
+        {
+            T result = new T();
+            result.LoadFromJson(jsonNode);
+            return result;
+        }
     }
 }

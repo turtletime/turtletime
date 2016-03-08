@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using UnityEngine;
 using CheloniiUnity;
 
-namespace TurtleTime
+namespace TurtleTime.Models
 {
-    class TurtleTimeModules
+    class TableModel : Model
     {
-        public static readonly GameModuleKey PHYSICAL = new GameModuleKey(0);
+        public Vector2 Position { get; set; }
     }
 }

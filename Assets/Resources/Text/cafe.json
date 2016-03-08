@@ -1,0 +1,9 @@
+{
+  "camera": {
+    "position": [4, 6, 18.1],
+    "rotation": [20, 180, 0],
+    "scale": [1, 1, 1],
+    "projection": "perspective",
+    "fieldOfView": "15"
+  }
+}

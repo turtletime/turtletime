@@ -13,13 +13,14 @@ namespace CheloniiUnity
             public T Subject;
             public bool Loaded;
         }
-
-        private Queue<IntermoduleOperation> operations = new Queue<IntermoduleOperation>();
+        
         private List<IControllable> controllers = new List<IControllable>();
         private List<Loadable<IViewable>> views = new List<Loadable<IViewable>>();
 
         private GameObject worldObject;
         private GameObject uiObject;
+
+        public GameEngine Engine { get; set; }
 
         public void SetGameObject(GameObject worldObject, GameObject uiObject)
         {
@@ -53,29 +54,6 @@ namespace CheloniiUnity
             l.Subject = view;
             views.Add(l);
         }
-
-        protected void EnqueueOperation(IntermoduleOperation operation)
-        {
-            operations.Enqueue(operation);
-        }
-
-        public bool CanDequeueOperation()
-        {
-            return operations.Count == 0;
-        }
-
-        public IntermoduleOperation DequeueOperation()
-        {
-            if (operations.Count == 0)
-            {
-                return null;
-            }
-            return operations.Dequeue();
-        }
-
-        public abstract GameModuleKey ModuleKey { get; }
-
-        public abstract void ReceiveData(GameModule other);
 
         public void UpdateMain(float dt)
         {
