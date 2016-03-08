@@ -5,6 +5,7 @@ using System.Text;
 using UnityEngine;
 using CheloniiUnity;
 using TurtleTime.Models;
+using TurtleTime.Controllers;
 using TurtleTime.Views;
 using System.IO;
 using SimpleJSON;
@@ -39,6 +40,8 @@ namespace TurtleTime
             RoomModel = new RoomModel("cafe_room");
             TableModels.Add(new TableModel() { Position = new Vector2(2, 2) });
             TurtleModels.Add(new TurtleModel() { StaticData = databaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });
+            // Controllers
+            AddController(new CameraController());
             // Views
             AddView(new RoomFloorView());
             AddView(new RoomWallsView());

@@ -57,13 +57,6 @@ namespace CheloniiUnity
 
         public void UpdateMain(float dt)
         {
-            foreach (IControllable c in controllers)
-            {
-                if (c.IsActive())
-                {
-                    c.Update(dt);
-                }
-            }
             foreach (Loadable<IViewable> v in views)
             {
                 if (v.Subject.IsActive())
@@ -82,6 +75,13 @@ namespace CheloniiUnity
                         v.Subject.Unload();
                         v.Loaded = false;
                     }
+                }
+            }
+            foreach (IControllable c in controllers)
+            {
+                if (c.IsActive())
+                {
+                    c.Update(dt);
                 }
             }
         }
