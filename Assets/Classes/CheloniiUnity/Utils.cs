@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using SimpleJSON;
 
 namespace CheloniiUnity
 {
@@ -24,6 +25,26 @@ namespace CheloniiUnity
         public static T ParseEnumValue<T>(String input)
         {
             return (T)Enum.Parse(typeof(T), input, true);
+        }
+
+        public static JSONNode LoadJSONConfig(String name)
+        {
+            String path = "Config/" + name;
+            TextAsset t = Resources.Load<TextAsset>(path);
+            if (t == null)
+            {
+                Debug.LogWarning(path + " not found.");
+                return null;
+            }
+            try
+            {
+                return JSONNode.Parse(t.text);
+            }
+            catch
+            {
+                Debug.LogWarning(path + " could not be loaded.");
+                return null;
+            }
         }
     }
 }

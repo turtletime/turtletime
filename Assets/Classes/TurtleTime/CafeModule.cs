@@ -27,16 +27,11 @@ namespace TurtleTime
         public override void Load()
         {
             // Load JSON
-            JSONNode jsonNode = null;
-            using (TextReader tr = new StreamReader("Assets/Resources/Text/cafe.json"))
-            {
-                String input = tr.ReadToEnd();
-                jsonNode = JSON.Parse(input);
-            }
+            JSONNode jsonNode = Utils.LoadJSONConfig("cafe");
             // Data links
             databaseModule = Engine.GetModule<TurtleDatabaseModule>();
             // Models
-            CameraModel = Model.LoadFromJson<CameraModel>(jsonNode["camera"]);
+            CameraModel = LoadFromJson<CameraModel>(jsonNode["camera"]);
             RoomModel = new RoomModel("cafe_room");
             TableModels.Add(new TableModel() { Position = new Vector2(2, 2) });
             TurtleModels.Add(new TurtleModel() { StaticData = databaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });

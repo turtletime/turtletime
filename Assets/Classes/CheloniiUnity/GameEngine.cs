@@ -26,8 +26,9 @@ namespace CheloniiUnity
 
         public abstract void Initialize();
 
-        protected void AddModule(GameModule module)
+        protected void AddModule<Module>() where Module : GameModule, new()
         {
+            Module module = new Module();
             moduleList.Add(module);
             moduleMap.Add(module.GetType(), module);
             module.SetGameObject(worldObject, uiObject);

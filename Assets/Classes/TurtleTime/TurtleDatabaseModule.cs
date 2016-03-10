@@ -17,15 +17,11 @@ namespace TurtleTime
             {
                 TurtleData = new Dictionary<string, TurtleDataModel>();
             }
-            using (TextReader tr = new StreamReader("Assets/Resources/Text/turtles.json"))
+            foreach (JSONNode child in Utils.LoadJSONConfig("turtles")["turtles"].Childs)
             {
-                String input = tr.ReadToEnd();
-                foreach (JSONNode child in JSON.Parse(input)["turtles"].Childs)
-                {
-                    TurtleDataModel turtle = new TurtleDataModel();
-                    turtle.LoadFromJson(child);
-                    TurtleData.Add(turtle.Name, turtle);
-                }
+                TurtleDataModel turtle = new TurtleDataModel();
+                turtle.LoadFromJson(child);
+                TurtleData.Add(turtle.Name, turtle);
             }
         }
 

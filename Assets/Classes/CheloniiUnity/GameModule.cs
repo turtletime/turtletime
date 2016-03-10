@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using SimpleJSON;
 
 namespace CheloniiUnity
 {
-    abstract class GameModule : Model
+    abstract class GameModule
     {
         private class Loadable<T>
         {
@@ -14,8 +15,8 @@ namespace CheloniiUnity
             public bool Loaded;
         }
         
-        private List<IControllable> controllers = new List<IControllable>();
-        private List<Loadable<IViewable>> views = new List<Loadable<IViewable>>();
+        private List<IController> controllers = new List<IController>();
+        private List<Loadable<IView>> views = new List<Loadable<IView>>();
 
         private GameObject worldObject;
         private GameObject uiObject;
@@ -49,7 +50,7 @@ namespace CheloniiUnity
             {
                 view.SetParent(uiObject);
             }
-            Loadable<IViewable> l = new Loadable<IViewable>();
+            Loadable<IView> l = new Loadable<IView>();
             l.Loaded = false;
             l.Subject = view;
             views.Add(l);
@@ -57,7 +58,7 @@ namespace CheloniiUnity
 
         public void UpdateMain(float dt)
         {
-            foreach (Loadable<IViewable> v in views)
+            foreach (Loadable<IView> v in views)
             {
                 if (v.Subject.IsActive())
                 {
@@ -77,13 +78,20 @@ namespace CheloniiUnity
                     }
                 }
             }
-            foreach (IControllable c in controllers)
+            foreach (IController c in controllers)
             {
                 if (c.IsActive())
                 {
                     c.Update(dt);
                 }
             }
+        }
+
+        public static T LoadFromJson<T>(JSONNode jsonNode) where T : IModel, new()
+        {
+            T result = new T();
+            result.LoadFromJson(jsonNode);
+            return result;
         }
     }
 }

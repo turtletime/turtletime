@@ -10,7 +10,7 @@ namespace CheloniiUnity
     /// This class MUST NOT contain extra state.
     /// </summary>
     /// <typeparam name="Module">The type of state class on which this Controller should operate.</typeparam>
-    abstract class Controller<Module> : IControllable where Module : GameModule
+    abstract class Controller<Module> : IController where Module : GameModule
     {
         /// <summary>
         /// Gets or sets a pointer to game state.
