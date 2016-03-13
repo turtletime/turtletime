@@ -23,6 +23,7 @@ namespace TurtleTime
         public CameraModel CameraModel;
         public RoomModel RoomModel;
         public List<TableModel> TableModels = new List<TableModel>();
+        public QueueModel QueueModel;
         public List<TurtleModel> TurtleModels = new List<TurtleModel>();
         public SeatCollectionModel SeatsModel;
 
@@ -38,10 +39,11 @@ namespace TurtleTime
             RoomModel = new RoomModel("cafe_room");
             foreach (JSONNode node in jsonNode["tables"].Childs)
             {
-                TableModels.Add(new TableModel() { Position = Utils.ParseVector2(node["position"].Value) });
+                TableModels.Add(LoadFromJson<TableModel>(node));
             }
+            QueueModel = LoadFromJson<QueueModel>(jsonNode["queue"]);
             TurtleModels.Add(new TurtleModel() { StaticData = DatabaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });
-            SeatsModel = new SeatCollectionModel(TableModels);
+            SeatsModel = new SeatCollectionModel(QueueModel, TableModels);
             // Controllers
             AddController(new CameraController());
             // Views

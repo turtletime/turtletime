@@ -7,9 +7,15 @@
     "fieldOfView": "15"
   },
   "tables": [
-    { "position": "(2, 5)" },
-    { "position": "(5, 5)" },
-    { "position": "(8, 5)" },
-    { "position": "(5, 8)" }
-  ]
+    { "position": [2, 5] },
+    { "position": [5, 5] },
+    { "position": [5, 8] },
+    { "position": [8, 5] }
+  ],
+  "queue": {
+    "position": [0, 0],
+    "direction": [0, 1],
+    "facing": [1, 0],
+    "numSeats": 5
+  }
 }

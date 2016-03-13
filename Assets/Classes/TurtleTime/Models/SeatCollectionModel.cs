@@ -8,10 +8,17 @@ namespace TurtleTime.Models
     {
         public List<SeatModel> Seats { get; set; }
         Dictionary<TableModel, List<SeatModel>> tableSeats = new Dictionary<TableModel, List<SeatModel>>();
+        List<SeatModel> queueSeats = new List<SeatModel>();
 
-        public SeatCollectionModel(List<TableModel> tableModels)
+        public SeatCollectionModel(QueueModel queueModel, List<TableModel> tableModels)
         {
             Seats = new List<SeatModel>();
+            for (int i = 0; i < queueModel.NumSeats; i++)
+            {
+                SeatModel seatModel = new SeatModel() { Position = queueModel.Position + i * queueModel.FacingDirection, Direction = queueModel.SeatExtensionDirection };
+                queueSeats.Add(seatModel);
+            }
+            Seats.AddRange(queueSeats);
             foreach (TableModel tableModel in tableModels)
             {
                 List<SeatModel> thisTableSeats = new List<SeatModel>();
