@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TurtleTime.Views
 {
-    class CameraView : View<CafeModule>
+    class CameraView : ModuleView<CafeModule>
     {
         private CameraModel cameraModel;
         public override ViewType GameObjectType { get { return ViewType.WORLD; } }

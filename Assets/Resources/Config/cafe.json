@@ -5,5 +5,11 @@
     "scale": [1, 1, 1],
     "projection": "perspective",
     "fieldOfView": "15"
-  }
+  },
+  "tables": [
+    { "position": "(2, 5)" },
+    { "position": "(5, 5)" },
+    { "position": "(8, 5)" },
+    { "position": "(5, 8)" }
+  ]
 }

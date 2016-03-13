@@ -17,24 +17,31 @@ namespace TurtleTime
     /// </summary>
     class CafeModule : GameModule
     {
-        TurtleDatabaseModule databaseModule;
+        private TurtleDatabaseModule DatabaseModule;
+        public QuickOptionsModule OptionsModule;
 
         public CameraModel CameraModel;
         public RoomModel RoomModel;
         public List<TableModel> TableModels = new List<TableModel>();
         public List<TurtleModel> TurtleModels = new List<TurtleModel>();
+        public SeatCollectionModel SeatsModel;
 
         public override void Load()
         {
             // Load JSON
             JSONNode jsonNode = Utils.LoadJSONConfig("cafe");
             // Data links
-            databaseModule = Engine.GetModule<TurtleDatabaseModule>();
+            DatabaseModule = Engine.GetModule<TurtleDatabaseModule>();
+            OptionsModule = Engine.GetModule<QuickOptionsModule>();
             // Models
             CameraModel = LoadFromJson<CameraModel>(jsonNode["camera"]);
             RoomModel = new RoomModel("cafe_room");
-            TableModels.Add(new TableModel() { Position = new Vector2(2, 2) });
-            TurtleModels.Add(new TurtleModel() { StaticData = databaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });
+            foreach (JSONNode node in jsonNode["tables"].Childs)
+            {
+                TableModels.Add(new TableModel() { Position = Utils.ParseVector2(node["position"].Value) });
+            }
+            TurtleModels.Add(new TurtleModel() { StaticData = DatabaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });
+            SeatsModel = new SeatCollectionModel(TableModels);
             // Controllers
             AddController(new CameraController());
             // Views
@@ -43,6 +50,7 @@ namespace TurtleTime
             AddView(new CameraView(CameraModel));
             foreach (TableModel tableModel in TableModels) { AddView(new TableView(tableModel)); }
             foreach (TurtleModel turtleModel in TurtleModels) { AddView(new TurtleView(turtleModel)); }
+            foreach (SeatModel seat in SeatsModel.Seats) { AddView(new SeatView(seat)); }
         }
 
         public override void Unload()

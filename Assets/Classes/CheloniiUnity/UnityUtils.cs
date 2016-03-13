@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.UI;
 
 namespace CheloniiUnity
@@ -96,6 +97,15 @@ namespace CheloniiUnity
             transform.pivot = new Vector2(0.5f, 0.5f);
             transform.localPosition = min + (max - min) / 2;
             transform.sizeDelta = max - min;
+        }
+
+        public static IEnumerable<Transform> GetChildren(Transform parent)
+        {
+            int numChildren = parent.childCount;
+            for (int index = 0; index < numChildren; index++)
+            {
+                yield return parent.GetChild(index);
+            }
         }
     }
 }

@@ -39,7 +39,23 @@ namespace CheloniiUnity
             controllers.Add(controller);
         }
 
-        protected void AddView<T>(View<T> view) where T : GameModule
+        protected void AddView<T>(SingleModelView<T> view) where T : Model
+        {
+            if (view.GameObjectType == ViewType.WORLD)
+            {
+                view.SetParent(worldObject);
+            }
+            else
+            {
+                view.SetParent(uiObject);
+            }
+            Loadable<IView> l = new Loadable<IView>();
+            l.Loaded = false;
+            l.Subject = view;
+            views.Add(l);
+        }
+
+        protected void AddView<T>(ModuleView<T> view) where T : GameModule
         {
             view.GameModule = (T)this;
             if (view.GameObjectType == ViewType.WORLD)

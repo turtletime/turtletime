@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using SimpleJSON;
 
@@ -45,6 +45,18 @@ namespace CheloniiUnity
                 Debug.LogWarning(path + " could not be loaded.");
                 return null;
             }
+        }
+
+        public static Vector2 ParseVector2(String str)
+        {
+            GroupCollection c = Regex.Match(str, @"\((.*),\s*(.*)\)").Groups;
+            float x, y;
+            if (Single.TryParse(c[1].Value, out x) && Single.TryParse(c[2].Value, out y))
+            {
+                return new Vector2(x, y);
+            }
+            Debug.Log("Could not parse " + str + " as Vector2.");
+            return Vector2.zero;
         }
     }
 }

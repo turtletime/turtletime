@@ -8,7 +8,7 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class TableView : View<CafeModule>
+    class TableView : ModuleView<CafeModule>
     {
         private TableModel tableModel;
 
@@ -36,7 +36,7 @@ namespace TurtleTime.Views
 
         public override void Update(float dt)
         {
-            gameObject.transform.position = new Vector3(tableModel.Position.x, 0, tableModel.Position.y);
+            gameObject.transform.position = TurtleUtils.ToWorldCoordinates(tableModel.Position);
         }
     }
 }
