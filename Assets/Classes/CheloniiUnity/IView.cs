@@ -7,6 +7,8 @@ namespace CheloniiUnity
 {
     interface IView : IController
     {
+        void Dispose();
+
         void Load();
 
         void Unload();

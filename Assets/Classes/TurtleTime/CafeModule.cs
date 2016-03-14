@@ -17,7 +17,7 @@ namespace TurtleTime
     /// </summary>
     class CafeModule : GameModule
     {
-        private TurtleDatabaseModule DatabaseModule;
+        public TurtleDatabaseModule DatabaseModule;
         public QuickOptionsModule OptionsModule;
 
         public CameraModel CameraModel;
@@ -42,10 +42,10 @@ namespace TurtleTime
                 TableModels.Add(LoadFromJson<TableModel>(node));
             }
             QueueModel = LoadFromJson<QueueModel>(jsonNode["queue"]);
-            TurtleModels.Add(new TurtleModel() { StaticData = DatabaseModule.TurtleData["turtle_1_no_materials"], Position = new Vector2(3, 2) });
             SeatsModel = new SeatCollectionModel(QueueModel, TableModels);
             // Controllers
             AddController(new CameraController());
+            AddController(new TurtleSpawnController());
             // Views
             AddView(new RoomFloorView());
             AddView(new RoomWallsView());
@@ -58,6 +58,20 @@ namespace TurtleTime
         public override void Unload()
         {
             // TODO
+        }
+
+        public void AssignTurtleToSeat(TurtleModel turtleModel, SeatModel seatModel)
+        {
+            if (turtleModel != null && seatModel != null)
+            {
+                SeatModel oldSeat = turtleModel.TargetSeat;
+                if (oldSeat != null)
+                {
+                    oldSeat.Turtle = null;
+                }
+                turtleModel.TargetSeat = seatModel;
+                seatModel.Turtle = turtleModel;
+            }
         }
     }
 }

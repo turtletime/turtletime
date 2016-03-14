@@ -14,9 +14,11 @@ namespace CheloniiUnity
             public T Subject;
             public bool Loaded;
         }
-        
-        private List<IController> controllers = new List<IController>();
-        private List<Loadable<IView>> views = new List<Loadable<IView>>();
+
+        //private HashSet<IModel> models = new HashSet<IModel>();
+        //private Dictionary<IModel, List<Loadable<IView>>> singleModelViews = new Dictionary<IModel, List<Loadable<IView>>>();
+        private HashSet<IController> controllers = new HashSet<IController>();
+        private HashSet<Loadable<IView>> views = new HashSet<Loadable<IView>>();
 
         private GameObject worldObject;
         private GameObject uiObject;
@@ -33,29 +35,47 @@ namespace CheloniiUnity
 
         public abstract void Unload();
 
+        //protected void AddModel<T>(Model model) where T : GameModule
+        //{
+        //    models.Add(model);
+        //    singleModelViews.Add(model, new List<Loadable<IView>>());
+        //    foreach (View<T> view in )
+        //    {
+        //        view.GameModule = (T)this;
+        //        if (view.GameObjectType == ViewType.WORLD)
+        //        {
+        //            view.SetParent(worldObject);
+        //        }
+        //        else
+        //        {
+        //            view.SetParent(uiObject);
+        //        }
+        //        Loadable<IView> l = new Loadable<IView>();
+        //        l.Loaded = false;
+        //        l.Subject = view;
+        //        views.Add(l);
+        //        singleModelViews[model].Add(l);
+        //    }
+        //}
+
+        //protected void RemoveModel(Model model)
+        //{
+        //    models.Remove(model);
+        //    foreach (Loadable<IView> v in singleModelViews[model])
+        //    {
+        //        v.Subject.Dispose();
+        //        views.Remove(v);
+        //    }
+        //    singleModelViews.Remove(model);
+        //}
+
         protected void AddController<T>(Controller<T> controller) where T : GameModule
         {
             controller.GameModule = (T)this;
             controllers.Add(controller);
         }
 
-        protected void AddView<T>(SingleModelView<T> view) where T : Model
-        {
-            if (view.GameObjectType == ViewType.WORLD)
-            {
-                view.SetParent(worldObject);
-            }
-            else
-            {
-                view.SetParent(uiObject);
-            }
-            Loadable<IView> l = new Loadable<IView>();
-            l.Loaded = false;
-            l.Subject = view;
-            views.Add(l);
-        }
-
-        protected void AddView<T>(ModuleView<T> view) where T : GameModule
+        public void AddView<T>(View<T> view) where T : GameModule
         {
             view.GameModule = (T)this;
             if (view.GameObjectType == ViewType.WORLD)

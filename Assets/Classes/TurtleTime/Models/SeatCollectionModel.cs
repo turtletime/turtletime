@@ -30,5 +30,29 @@ namespace TurtleTime.Models
                 tableSeats.Add(tableModel, thisTableSeats);
             }
         }
+
+        public SeatModel GetFreeQueueSeat()
+        {
+            foreach (SeatModel s in queueSeats)
+            {
+                if (s.Turtle == null)
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
+
+        public SeatModel GetFreeTableSeat(TableModel tableModel)
+        {
+            foreach (SeatModel s in tableSeats[tableModel])
+            {
+                if (s.Turtle != null)
+                {
+                    return s;
+                }
+            }
+            return null;
+        }
     }
 }

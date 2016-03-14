@@ -5,7 +5,7 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class SeatView : ModuleView<CafeModule>
+    class SeatView : View<CafeModule>
     {
         public override ViewType GameObjectType { get { return ViewType.WORLD; } }
 

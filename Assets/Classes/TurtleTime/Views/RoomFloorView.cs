@@ -6,7 +6,7 @@ using CheloniiUnity;
 
 namespace TurtleTime.Views
 {
-    class RoomFloorView : ModuleView<CafeModule>
+    class RoomFloorView : View<CafeModule>
     {
         public override ViewType GameObjectType { get { return ViewType.WORLD; } }
 

@@ -10,7 +10,5 @@ namespace CheloniiUnity
     class Model : IModel
     {
         public virtual void LoadFromJson(JSONNode jsonNode) { }
-
-        public virtual IEnumerable<IView> InstantiateSingleModelViews() { yield break; }
     }
 }

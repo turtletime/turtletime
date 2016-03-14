@@ -20,7 +20,7 @@ namespace TurtleTime
             }
         }
 
-        public class QuickOptionsView : ModuleView<QuickOptionsModule>
+        public class QuickOptionsView : View<QuickOptionsModule>
         {
             public override ViewType GameObjectType { get { return ViewType.UI; } }
 

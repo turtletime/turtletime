@@ -8,7 +8,7 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class TableView : ModuleView<CafeModule>
+    class TableView : View<CafeModule>
     {
         private TableModel tableModel;
 
