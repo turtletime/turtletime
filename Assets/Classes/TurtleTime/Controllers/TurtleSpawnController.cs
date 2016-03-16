@@ -8,8 +8,12 @@ using TurtleTime.Views;
 
 namespace TurtleTime.Controllers
 {
-    class TurtleSpawnController : Controller<CafeModule>
+    class TurtleSpawnController : Controller
     {
+        public ModelCollection<TurtleModel> TurtleModels { get; set; }
+        public SeatCollectionModel SeatsModel { get; set; }
+        public TurtleDatabaseModel TurtleDatabaseModel { get; set; }
+
         public static int SPAWN_INTERVAL_SECONDS = 2;
 
         float timeSinceLastSpawn = 0;
@@ -25,14 +29,13 @@ namespace TurtleTime.Controllers
             if (timeSinceLastSpawn > SPAWN_INTERVAL_SECONDS)
             {
                 timeSinceLastSpawn -= SPAWN_INTERVAL_SECONDS;
-                SeatModel assignedSeat = GameModule.SeatsModel.GetFreeQueueSeat();
+                SeatModel assignedSeat = SeatsModel.GetFreeQueueSeat();
                 if (assignedSeat != null)
                 {
                     // Spawn turtle
-                    TurtleModel newTurtle = new TurtleModel() { StaticData = GameModule.DatabaseModule.TurtleData["turtle_1_no_materials"] };
-                    GameModule.TurtleModels.Add(newTurtle);
-                    GameModule.AddView(new TurtleView(newTurtle));
-                    GameModule.AssignTurtleToSeat(newTurtle, assignedSeat);
+                    TurtleModel newTurtle = new TurtleModel() { StaticData = TurtleDatabaseModel.TurtleData["turtle_1_no_materials"] };
+                    TurtleModels.Add(newTurtle);
+                    TurtleModel.AssignTurtleToSeat(newTurtle, assignedSeat);
                 }
             }
         }

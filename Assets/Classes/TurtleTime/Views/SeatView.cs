@@ -5,42 +5,23 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class SeatView : View<CafeModule>
+    class SeatView : View<SeatModel>
     {
-        public override ViewType GameObjectType { get { return ViewType.WORLD; } }
-
-        protected override string Name { get { return "Seat"; } }
-
-        SeatModel model;
         Material material;
         float time;
 
-        public SeatView(SeatModel model)
+        protected override void Load()
         {
-            this.model = model;
-        }
-
-        public override bool IsActive()
-        {
-            return GameModule.OptionsModule.Options.debugMode;
-        }
-
-        public override void Load()
-        {
+            this.name = "Seat";
             UnityUtils.CreateMesh(gameObject, "seat", "base", "Default-Diffuse");
-            this.gameObject.transform.position = TurtleUtils.ToWorldCoordinates(model.Position, 0.01f);
-            this.gameObject.transform.Rotate(Vector3.forward, Mathf.Rad2Deg * Mathf.Atan2(-model.Direction.y, model.Direction.x));
+            this.gameObject.transform.position = TurtleUtils.ToWorldCoordinates(Model.Position, 0.01f);
+            this.gameObject.transform.Rotate(Vector3.forward, Mathf.Rad2Deg * Mathf.Atan2(-Model.Direction.y, Model.Direction.x));
             material = this.gameObject.GetComponent<MeshRenderer>().material;
         }
 
-        public override void Unload()
+        public override void Update()
         {
-            
-        }
-
-        public override void Update(float dt)
-        {
-            time += dt;
+            time += 0.1f;
             float t = (Mathf.Sin(time * 4) + 1) / 2;
             material.color = new Color(1, t, t, 1);
         }

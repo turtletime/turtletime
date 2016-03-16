@@ -8,35 +8,18 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class TurtleView : View<CafeModule>
+    class TurtleView : View<TurtleModel>
     {
-        private TurtleModel turtleModel;
-
-        public TurtleView(TurtleModel turtleModel)
+        protected override void Load()
         {
-            this.turtleModel = turtleModel;
-        }
-
-        public override ViewType GameObjectType { get { return ViewType.WORLD; } }
-
-        protected override string Name { get { return "Turtle"; } }
-
-        public override bool IsActive() { return true; }
-
-        public override void Load()
-        {
-            UnityUtils.CreateMesh(gameObject, turtleModel.StaticData.Name, "turtle", "cafe_floor_material");
+            this.name = "Turtle";
+            UnityUtils.CreateMesh(gameObject, Model.StaticData.Name, "turtle", "cafe_floor_material");
             gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        public override void Unload()
+        public override void Update()
         {
-
-        }
-
-        public override void Update(float dt)
-        {
-            gameObject.transform.position = TurtleUtils.ToWorldCoordinates(turtleModel.Position);
+            gameObject.transform.position = TurtleUtils.ToWorldCoordinates(Model.Position);
         }
     }
 }

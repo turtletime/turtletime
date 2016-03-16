@@ -10,8 +10,6 @@ namespace TurtleTime
     {
         public override void Initialize()
         {
-            AddModule<QuickOptionsModule>();
-            AddModule<TurtleDatabaseModule>();
             AddModule<CafeModule>();
         }
     }

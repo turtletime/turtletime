@@ -8,40 +8,21 @@ using UnityEngine;
 
 namespace TurtleTime.Views
 {
-    class CameraView : View<CafeModule>
+    class CameraView : View<CameraModel>
     {
-        private CameraModel cameraModel;
-        public override ViewType GameObjectType { get { return ViewType.WORLD; } }
-
-        protected override string Name { get { return "Camera"; } }
-
-        public CameraView(CameraModel cameraModel)
+        protected override void Load()
         {
-            this.cameraModel = cameraModel;
-        }
-
-        public override bool IsActive()
-        {
-            return true;
-        }
-
-        public override void Load()
-        {
+            this.name = "Camera";
             UnityUtils.CreateCamera(this.gameObject);
         }
 
-        public override void Unload()
+        public override void Update()
         {
-            
-        }
-
-        public override void Update(float dt)
-        {
-            gameObject.transform.position = cameraModel.Position;
-            gameObject.transform.rotation = cameraModel.Rotation;
-            gameObject.transform.localScale = cameraModel.Scale;
-            gameObject.GetComponent<Camera>().orthographic = cameraModel.Projection == CameraModel.CameraProjection.ORTHOGRAPHIC;
-            gameObject.GetComponent<Camera>().fieldOfView = cameraModel.FieldOfView;
+            transform.position = Model.Position;
+            transform.rotation = Model.Rotation;
+            transform.localScale = Model.Scale;
+            GetComponent<Camera>().orthographic = Model.Projection == CameraModel.CameraProjection.ORTHOGRAPHIC;
+            GetComponent<Camera>().fieldOfView = Model.FieldOfView;
         }
     }
 }

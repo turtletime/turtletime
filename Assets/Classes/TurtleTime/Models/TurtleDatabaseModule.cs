@@ -5,29 +5,25 @@ using System.IO;
 using System.Collections.Generic;
 using SimpleJSON;
 
-namespace TurtleTime
+namespace TurtleTime.Models
 {
-    class TurtleDatabaseModule : GameModule
+    class TurtleDatabaseModel : Model
     {
         public Dictionary<String, TurtleDataModel> TurtleData { get; private set; }
 
-        public override void Load()
+        public TurtleDatabaseModel()
         {
-            if (TurtleData == null)
-            {
-                TurtleData = new Dictionary<string, TurtleDataModel>();
-            }
-            foreach (JSONNode child in Utils.LoadJSONConfig("turtles")["turtles"].Childs)
+            TurtleData = new Dictionary<string, TurtleDataModel>();
+        }
+
+        public override void LoadFromJson(JSONNode jsonNode)
+        {
+            foreach (JSONNode child in jsonNode.Childs)
             {
                 TurtleDataModel turtle = new TurtleDataModel();
                 turtle.LoadFromJson(child);
                 TurtleData.Add(turtle.Name, turtle);
             }
-        }
-
-        public override void Unload()
-        {
-            TurtleData.Clear();
         }
     }
 }

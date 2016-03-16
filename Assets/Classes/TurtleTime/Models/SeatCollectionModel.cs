@@ -10,7 +10,7 @@ namespace TurtleTime.Models
         Dictionary<TableModel, List<SeatModel>> tableSeats = new Dictionary<TableModel, List<SeatModel>>();
         List<SeatModel> queueSeats = new List<SeatModel>();
 
-        public SeatCollectionModel(QueueModel queueModel, List<TableModel> tableModels)
+        public SeatCollectionModel(QueueModel queueModel, ModelCollection<TableModel> tableModels)
         {
             Seats = new List<SeatModel>();
             for (int i = 0; i < queueModel.NumSeats; i++)
@@ -35,7 +35,7 @@ namespace TurtleTime.Models
         {
             foreach (SeatModel s in queueSeats)
             {
-                if (s.Turtle == null)
+                if (!s.Taken)
                 {
                     return s;
                 }
@@ -47,7 +47,7 @@ namespace TurtleTime.Models
         {
             foreach (SeatModel s in tableSeats[tableModel])
             {
-                if (s.Turtle != null)
+                if (!s.Taken)
                 {
                     return s;
                 }

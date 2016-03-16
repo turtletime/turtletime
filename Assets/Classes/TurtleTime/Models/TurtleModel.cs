@@ -47,5 +47,20 @@ namespace TurtleTime.Models
                 }
             }
         }
+
+
+        public static void AssignTurtleToSeat(TurtleModel turtleModel, SeatModel seatModel)
+        {
+            if (turtleModel != null && seatModel != null)
+            {
+                SeatModel oldSeat = turtleModel.TargetSeat;
+                if (oldSeat != null)
+                {
+                    oldSeat.Taken = false;
+                }
+                turtleModel.TargetSeat = seatModel;
+                seatModel.Taken = true;
+            }
+        }
     }
 }

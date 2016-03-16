@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using CheloniiUnity;
 using UnityEngine;
+using TurtleTime.Models;
 
 namespace TurtleTime.Controllers
 {
-    class CameraController : Controller<CafeModule>
+    class CameraController : Controller
     {
+        public CameraModel CameraModel { get; set; }
+
         Vector2 mousePrev = new Vector2();
 
         public CameraController()
@@ -34,7 +37,7 @@ namespace TurtleTime.Controllers
             {
                 dp += Input.GetTouch(0).deltaPosition;
             }
-            GameModule.CameraModel.Position += new Vector3(0.01f * dp.x, 0, 0);
+            CameraModel.Position += new Vector3(0.01f * dp.x, 0, 0);
         }
     }
 }

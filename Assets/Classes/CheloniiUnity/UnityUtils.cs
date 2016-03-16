@@ -9,6 +9,9 @@ namespace CheloniiUnity
     /// </summary>
     static class UnityUtils
     {
+        public static readonly Quaternion GLOBAL_ROTATION = Quaternion.Euler(new Vector3(270, 180, 0));
+        public static readonly Quaternion GLOBAL_ROTATION_INV = Quaternion.Euler(new Vector3(-270, -180, 0));
+
         public static void CreateCamera(GameObject gameObject)
         {
             gameObject.AddComponent<Camera>();

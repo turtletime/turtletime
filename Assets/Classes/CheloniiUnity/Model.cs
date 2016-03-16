@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SimpleJSON;
+using UnityEngine;
 
 namespace CheloniiUnity
 {
-    class Model : IModel
+    abstract class Model : IModel
     {
         public virtual void LoadFromJson(JSONNode jsonNode) { }
     }

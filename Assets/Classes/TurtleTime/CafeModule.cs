@@ -17,61 +17,36 @@ namespace TurtleTime
     /// </summary>
     class CafeModule : GameModule
     {
-        public TurtleDatabaseModule DatabaseModule;
-        public QuickOptionsModule OptionsModule;
-
-        public CameraModel CameraModel;
-        public RoomModel RoomModel;
-        public List<TableModel> TableModels = new List<TableModel>();
-        public QueueModel QueueModel;
-        public List<TurtleModel> TurtleModels = new List<TurtleModel>();
-        public SeatCollectionModel SeatsModel;
-
         public override void Load()
         {
             // Load JSON
-            JSONNode jsonNode = Utils.LoadJSONConfig("cafe");
-            // Data links
-            DatabaseModule = Engine.GetModule<TurtleDatabaseModule>();
-            OptionsModule = Engine.GetModule<QuickOptionsModule>();
+            JSONNode cafeJSON = Utils.LoadJSONConfig("cafe");
+            JSONNode turtleJSON = Utils.LoadJSONConfig("turtles");
             // Models
-            CameraModel = LoadFromJson<CameraModel>(jsonNode["camera"]);
-            RoomModel = new RoomModel("cafe_room");
-            foreach (JSONNode node in jsonNode["tables"].Childs)
+            AddSingleModel("turtleDatabase", LoadFromJson<TurtleDatabaseModel>(turtleJSON["turtles"]));
+            AddSingleModelWithView<CameraModel, CameraView>("camera", LoadFromJson<CameraModel>(cafeJSON["camera"]));
+            AddSingleModelWithView<MouseRayModel, MouseRayView>("mouseRayModel", new MouseRayModel());
+            AddSingleModelWithView<RoomModel, RoomView>("cafeRoom", new RoomModel("cafe_room"));
+            AddEmptyModelList("turtles", new ModelWithViewCollection<TurtleModel, TurtleView>());
+            AddEmptyModelList("tables", new ModelWithViewCollection<TableModel, TableView>());
+            foreach (JSONNode node in cafeJSON["tables"].Childs)
             {
-                TableModels.Add(LoadFromJson<TableModel>(node));
+                GetModelCollection<TableModel>("tables").Add(LoadFromJson<TableModel>(node));
             }
-            QueueModel = LoadFromJson<QueueModel>(jsonNode["queue"]);
-            SeatsModel = new SeatCollectionModel(QueueModel, TableModels);
+            AddSingleModel("queue", LoadFromJson<QueueModel>(cafeJSON["queue"]));
+            AddSingleModel("seats", new SeatCollectionModel(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables")));
             // Controllers
-            AddController(new CameraController());
-            AddController(new TurtleSpawnController());
-            // Views
-            AddView(new RoomFloorView());
-            AddView(new RoomWallsView());
-            AddView(new CameraView(CameraModel));
-            foreach (TableModel tableModel in TableModels) { AddView(new TableView(tableModel)); }
-            foreach (TurtleModel turtleModel in TurtleModels) { AddView(new TurtleView(turtleModel)); }
-            foreach (SeatModel seat in SeatsModel.Seats) { AddView(new SeatView(seat)); }
+            AddController(new CameraController() { CameraModel = GetModel<CameraModel>("camera") });
+            AddController(new TurtleSpawnController() {
+                TurtleModels = GetModelCollection<TurtleModel>("turtles"),
+                SeatsModel = GetModel<SeatCollectionModel>("seats"),
+                TurtleDatabaseModel = GetModel<TurtleDatabaseModel>("turtleDatabase") });
+            AddController(new InputController() { MouseRayModel = GetModel<MouseRayModel>("mouseRayModel") });
         }
 
         public override void Unload()
         {
             // TODO
-        }
-
-        public void AssignTurtleToSeat(TurtleModel turtleModel, SeatModel seatModel)
-        {
-            if (turtleModel != null && seatModel != null)
-            {
-                SeatModel oldSeat = turtleModel.TargetSeat;
-                if (oldSeat != null)
-                {
-                    oldSeat.Turtle = null;
-                }
-                turtleModel.TargetSeat = seatModel;
-                seatModel.Turtle = turtleModel;
-            }
         }
     }
 }
