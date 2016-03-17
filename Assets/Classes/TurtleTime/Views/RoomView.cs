@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TurtleTime.Views
 {
-    class RoomView : View<RoomModel>
+    class RoomView : View3D<RoomModel>
     {
         GameObject floor;
         GameObject walls;

@@ -8,13 +8,14 @@ using UnityEngine;
 
 namespace TurtleTime.Models
 {
-    class TurtleModel : Model
+    class TurtleModel : Model, IPhysicalModel
     {
         private SeatModel targetSeat;
 
         public TurtleDataModel StaticData { get; set; }
-        public SeatModel PreviousSeat { get; private set; }
         public float ProgressToTargetSeat { get; set; }
+        public bool Selected { get; set; }
+        public Vector2 Position { get; set; }
 
         public SeatModel TargetSeat
         {
@@ -24,30 +25,10 @@ namespace TurtleTime.Models
             }
             set
             {
-                PreviousSeat = targetSeat;
+                ProgressToTargetSeat = 0;
                 targetSeat = value;
             }
         }
-
-        public Vector2 Position
-        {
-            get
-            {
-                if (TargetSeat == null)
-                {
-                    return Vector2.zero;
-                }
-                else if (PreviousSeat == null)
-                {
-                    return TargetSeat.Position;
-                }
-                else
-                {
-                    return Vector2.Lerp(PreviousSeat.Position, TargetSeat.Position, ProgressToTargetSeat);
-                }
-            }
-        }
-
 
         public static void AssignTurtleToSeat(TurtleModel turtleModel, SeatModel seatModel)
         {

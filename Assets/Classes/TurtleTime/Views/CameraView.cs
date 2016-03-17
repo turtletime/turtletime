@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TurtleTime.Views
 {
-    class CameraView : View<CameraModel>
+    class CameraView : View3D<CameraModel>
     {
         protected override void Load()
         {

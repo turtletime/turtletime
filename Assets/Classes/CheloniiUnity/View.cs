@@ -10,6 +10,8 @@ namespace CheloniiUnity
     {
         public T Model { get; set; }
 
+        protected abstract String ParentNodeName { get; }
+
         public void Start()
         {
             Load();
@@ -20,5 +22,15 @@ namespace CheloniiUnity
         protected abstract void Load();
 
         public abstract void Update();
+    }
+
+    abstract class View3D<T> : View<T> where T : Model
+    {
+        protected override String ParentNodeName { get { return "3D Node"; } }
+    }
+
+    abstract class ViewUI<T> : View<T> where T : Model
+    {
+        protected override String ParentNodeName { get { return "UI Node"; } }
     }
 }

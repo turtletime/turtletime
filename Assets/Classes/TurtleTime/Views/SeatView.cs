@@ -5,7 +5,7 @@ using TurtleTime.Models;
 
 namespace TurtleTime.Views
 {
-    class SeatView : View<SeatModel>
+    class SeatView : View3D<SeatModel>
     {
         Material material;
         float time;
@@ -14,7 +14,7 @@ namespace TurtleTime.Views
         {
             this.name = "Seat";
             UnityUtils.CreateMesh(gameObject, "seat", "base", "Default-Diffuse");
-            this.gameObject.transform.position = TurtleUtils.ToWorldCoordinates(Model.Position, 0.01f);
+            this.gameObject.transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position, 0.01f);
             this.gameObject.transform.Rotate(Vector3.forward, Mathf.Rad2Deg * Mathf.Atan2(-Model.Direction.y, Model.Direction.x));
             material = this.gameObject.GetComponent<MeshRenderer>().material;
         }

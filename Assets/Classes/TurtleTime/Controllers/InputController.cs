@@ -10,7 +10,7 @@ namespace TurtleTime.Controllers
 {
     class InputController : Controller
     {
-        public MouseRayModel MouseRayModel { get; set; }
+        public MouseInputModel MouseRayModel { get; set; }
 
         public override bool IsActive()
         {
@@ -22,10 +22,11 @@ namespace TurtleTime.Controllers
             Camera currentCamera = Camera.current;
             if (currentCamera != null)
             {
-                MouseRayModel.MouseRay = currentCamera.ViewportPointToRay(currentCamera.ScreenToViewportPoint(Input.mousePosition));
-                MouseRayModel.MouseRay = new Ray(UnityUtils.GLOBAL_ROTATION * MouseRayModel.MouseRay.origin,
-                    UnityUtils.GLOBAL_ROTATION * MouseRayModel.MouseRay.direction);
+                MouseRayModel.WorldSpaceRay = currentCamera.ViewportPointToRay(currentCamera.ScreenToViewportPoint(Input.mousePosition));
+                MouseRayModel.WorldSpaceRay = new Ray(MouseRayModel.WorldSpaceRay.origin,
+                    MouseRayModel.WorldSpaceRay.direction);
             }
+            MouseRayModel.IsClicked = Input.GetMouseButton(0);
         }
     }
 }

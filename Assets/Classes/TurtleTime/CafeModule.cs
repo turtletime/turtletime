@@ -22,10 +22,12 @@ namespace TurtleTime
             // Load JSON
             JSONNode cafeJSON = Utils.LoadJSONConfig("cafe");
             JSONNode turtleJSON = Utils.LoadJSONConfig("turtles");
+
             // Models
+
             AddSingleModel("turtleDatabase", LoadFromJson<TurtleDatabaseModel>(turtleJSON["turtles"]));
             AddSingleModelWithView<CameraModel, CameraView>("camera", LoadFromJson<CameraModel>(cafeJSON["camera"]));
-            AddSingleModelWithView<MouseRayModel, MouseRayView>("mouseRayModel", new MouseRayModel());
+            AddSingleModelWithView<MouseInputModel, MouseInputView>("mouseRayModel", new MouseInputModel());
             AddSingleModelWithView<RoomModel, RoomView>("cafeRoom", new RoomModel("cafe_room"));
             AddEmptyModelList("turtles", new ModelWithViewCollection<TurtleModel, TurtleView>());
             AddEmptyModelList("tables", new ModelWithViewCollection<TableModel, TableView>());
@@ -35,13 +37,18 @@ namespace TurtleTime
             }
             AddSingleModel("queue", LoadFromJson<QueueModel>(cafeJSON["queue"]));
             AddSingleModel("seats", new SeatCollectionModel(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables")));
+
             // Controllers
+
             AddController(new CameraController() { CameraModel = GetModel<CameraModel>("camera") });
             AddController(new TurtleSpawnController() {
                 TurtleModels = GetModelCollection<TurtleModel>("turtles"),
                 SeatsModel = GetModel<SeatCollectionModel>("seats"),
                 TurtleDatabaseModel = GetModel<TurtleDatabaseModel>("turtleDatabase") });
-            AddController(new InputController() { MouseRayModel = GetModel<MouseRayModel>("mouseRayModel") });
+            AddController(new InputController() { MouseRayModel = GetModel<MouseInputModel>("mouseRayModel") });
+            AddController(new TurtleController() {
+                TurtleModels = GetModelCollection<TurtleModel>("turtles"),
+                MouseRayModel = GetModel<MouseInputModel>("mouseRayModel") });
         }
 
         public override void Unload()
