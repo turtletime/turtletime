@@ -15,15 +15,6 @@ namespace CheloniiUnity
         private Dictionary<Type, GameModule> moduleMap = new Dictionary<Type, GameModule>();
         private List<GameModule> moduleList = new List<GameModule>();
 
-        private GameObject worldObject;
-        private GameObject uiObject;
-
-        public void SetGameObjects(GameObject worldObject, GameObject uiObject)
-        {
-            this.worldObject = worldObject;
-            this.uiObject = uiObject;
-        }
-
         public abstract void Initialize();
 
         protected void AddModule<Module>() where Module : GameModule, new()
@@ -31,7 +22,6 @@ namespace CheloniiUnity
             Module module = new Module();
             moduleList.Add(module);
             moduleMap.Add(module.GetType(), module);
-            module.SetGameObject(worldObject, uiObject);
             module.Engine = this;
             module.Load();
         }

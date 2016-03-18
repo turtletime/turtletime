@@ -11,47 +11,42 @@ namespace TurtleTime.Controllers
     class TurtleController : Controller
     {
         public ModelCollection<TurtleModel> TurtleModels { get; set; }
-        public MouseInputModel MouseRayModel { get; set; }
-
-        public override bool IsActive()
-        {
-            return true;
-        }
+        public MouseInputModel MouseInputModel { get; set; }
 
         public override void Update(float deltaTime)
         {
-            TurtleModel selectedModel = null;
-            foreach (TurtleModel model in TurtleModels)
+            TurtleModel clickedTurtle = null;
+            foreach (TurtleModel turtle in TurtleModels)
             {
-                if (model.TargetSeat == null)
+                if (turtle.TargetSeat == null)
                 {
-                    model.Position = Vector2.zero;
+                    turtle.Position = Vector2.zero;
                 }
                 else
                 {
-                    model.Position = Vector2.Lerp(model.Position, model.TargetSeat.Position, model.ProgressToTargetSeat);
+                    turtle.Position = Vector2.Lerp(turtle.Position, turtle.TargetSeat.Position, turtle.ProgressToTargetSeat);
                 }
-                model.ProgressToTargetSeat += 0.1f; // TODO
-                if (model.ProgressToTargetSeat > 1)
+                turtle.ProgressToTargetSeat += 0.1f; // TODO
+                if (turtle.ProgressToTargetSeat > 1)
                 {
-                    model.ProgressToTargetSeat = 1;
+                    turtle.ProgressToTargetSeat = 1;
                 }
-                // Selected?
-                if (MouseRayModel.JustClicked && MouseRayModel.Intersects(model))
+                // Clicked?
+                if (MouseInputModel.JustClicked && MouseInputModel.Intersects(turtle))
                 {
-                    selectedModel = model;
+                    clickedTurtle = turtle;
                 }
             }
-            if (selectedModel != null)
+            if (clickedTurtle != null)
             {
                 foreach (TurtleModel model in TurtleModels)
                 {
-                    if (!selectedModel.Equals(model))
+                    if (!clickedTurtle.Equals(model))
                     {
                         model.Selected = false;
                     }
                 }
-                selectedModel.Selected = !selectedModel.Selected;
+                clickedTurtle.Selected = !clickedTurtle.Selected;
             }
         }
     }

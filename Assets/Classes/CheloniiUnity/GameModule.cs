@@ -13,18 +13,9 @@ namespace CheloniiUnity
         private Dictionary<String, Model> models = new Dictionary<string, Model>();
         private Dictionary<String, object> modelLists = new Dictionary<string, object>();
 
-        private HashSet<IController> controllers = new HashSet<IController>();
-
-        private GameObject worldObject;
-        private GameObject uiObject;
+        private HashSet<Controller> controllers = new HashSet<Controller>();
 
         public GameEngine Engine { get; set; }
-
-        public void SetGameObject(GameObject worldObject, GameObject uiObject)
-        {
-            this.worldObject = worldObject;
-            this.uiObject = uiObject;
-        }
 
         public abstract void Load();
 
@@ -32,12 +23,9 @@ namespace CheloniiUnity
 
         public void UpdateMain(float dt)
         {
-            foreach (IController c in controllers)
+            foreach (Controller c in controllers)
             {
-                if (c.IsActive())
-                {
-                    c.Update(dt);
-                }
+                c.Update(dt);
             }
         }
 
@@ -73,7 +61,7 @@ namespace CheloniiUnity
             return (ModelCollection<T>)modelLists[key];
         }
 
-        public static T LoadFromJson<T>(JSONNode jsonNode) where T : IModel, new()
+        public static T LoadFromJson<T>(JSONNode jsonNode) where T : Model, new()
         {
             T result = new T();
             result.LoadFromJson(jsonNode);

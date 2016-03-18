@@ -20,6 +20,14 @@ namespace CheloniiUnity
             models.Add(item);
         }
 
+        public virtual void AddRange(ICollection<M> items)
+        {
+            foreach (M item in items)
+            {
+                Add(item);
+            }
+        }
+
         public virtual void Clear()
         {
             models.Clear();

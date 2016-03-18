@@ -9,5 +9,6 @@ namespace TurtleTime
     interface IPhysicalModel
     {
         Vector2 Position { get; set; }
+        Vector2 Direction { get; set; }
     }
 }

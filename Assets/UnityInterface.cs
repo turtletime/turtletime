@@ -19,7 +19,6 @@ public class UnityInterface : MonoBehaviour
         ui.transform.parent = gameObject.transform;
         ui.AddComponent<Canvas>();
         ui.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
-        engine.SetGameObjects(world, ui);
         engine.Initialize();
     }
 

@@ -16,6 +16,7 @@ namespace TurtleTime.Models
         public float ProgressToTargetSeat { get; set; }
         public bool Selected { get; set; }
         public Vector2 Position { get; set; }
+        public Vector2 Direction { get; set; }
 
         public SeatModel TargetSeat
         {
@@ -23,7 +24,7 @@ namespace TurtleTime.Models
             {
                 return targetSeat;
             }
-            set
+            protected set
             {
                 ProgressToTargetSeat = 0;
                 targetSeat = value;
@@ -40,6 +41,7 @@ namespace TurtleTime.Models
                     oldSeat.Taken = false;
                 }
                 turtleModel.TargetSeat = seatModel;
+                turtleModel.Direction = seatModel.Direction;
                 seatModel.Taken = true;
             }
         }

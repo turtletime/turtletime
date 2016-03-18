@@ -18,11 +18,6 @@ namespace TurtleTime.Controllers
 
         float timeSinceLastSpawn = 0;
 
-        public override bool IsActive()
-        {
-            return true;
-        }
-
         public override void Update(float deltaTime)
         {
             timeSinceLastSpawn += deltaTime;

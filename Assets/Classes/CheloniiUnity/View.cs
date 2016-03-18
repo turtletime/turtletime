@@ -14,9 +14,9 @@ namespace CheloniiUnity
 
         public void Start()
         {
-            Load();
             // Attach this to a known node
-            transform.SetParent(GameObject.Find("3D Node").transform, false);
+            transform.SetParent(GameObject.Find(ParentNodeName).transform, false);
+            Load();
         }
 
         protected abstract void Load();
@@ -32,5 +32,7 @@ namespace CheloniiUnity
     abstract class ViewUI<T> : View<T> where T : Model
     {
         protected override String ParentNodeName { get { return "UI Node"; } }
+
+        protected Rect ViewportRect { get { return transform.GetComponentInParent<RectTransform>().rect; } }
     }
 }

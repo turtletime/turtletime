@@ -7,9 +7,10 @@ using CheloniiUnity;
 
 namespace TurtleTime.Models
 {
-    class SeatModel : Model
+    class SeatModel : Model, IPhysicalModel
     {
         public bool Taken { get; set; }
+        public bool Selected { get; set; }
         public Vector2 Position { get; set; }
         public Vector2 Direction { get; set; }
     }

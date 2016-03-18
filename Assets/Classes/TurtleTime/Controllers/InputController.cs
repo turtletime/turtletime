@@ -12,11 +12,6 @@ namespace TurtleTime.Controllers
     {
         public MouseInputModel MouseRayModel { get; set; }
 
-        public override bool IsActive()
-        {
-            return true;
-        }
-
         public override void Update(float deltaTime)
         {
             Camera currentCamera = Camera.current;

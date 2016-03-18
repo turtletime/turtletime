@@ -15,7 +15,7 @@ namespace TurtleTime.Views
             this.name = "Seat";
             UnityUtils.CreateMesh(gameObject, "seat", "base", "Default-Diffuse");
             this.gameObject.transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position, 0.01f);
-            this.gameObject.transform.Rotate(Vector3.forward, Mathf.Rad2Deg * Mathf.Atan2(-Model.Direction.y, Model.Direction.x));
+            this.gameObject.transform.Rotate(Vector3.forward, Mathf.Rad2Deg * Mathf.Atan2(-Model.Direction.y, Model.Direction.x) - 90);
             material = this.gameObject.GetComponent<MeshRenderer>().material;
         }
 

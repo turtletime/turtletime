@@ -19,36 +19,66 @@ namespace TurtleTime
     {
         public override void Load()
         {
-            // Load JSON
+            /* Load JSON */
+
             JSONNode cafeJSON = Utils.LoadJSONConfig("cafe");
             JSONNode turtleJSON = Utils.LoadJSONConfig("turtles");
+            JSONNode uiJSON = Utils.LoadJSONConfig("ui");
 
-            // Models
+            /* Models */
 
             AddSingleModel("turtleDatabase", LoadFromJson<TurtleDatabaseModel>(turtleJSON["turtles"]));
             AddSingleModelWithView<CameraModel, CameraView>("camera", LoadFromJson<CameraModel>(cafeJSON["camera"]));
-            AddSingleModelWithView<MouseInputModel, MouseInputView>("mouseRayModel", new MouseInputModel());
+            AddSingleModelWithView<MouseInputModel, MouseInputView>("mouseRay", new MouseInputModel());
             AddSingleModelWithView<RoomModel, RoomView>("cafeRoom", new RoomModel("cafe_room"));
+            // turtles
             AddEmptyModelList("turtles", new ModelWithViewCollection<TurtleModel, TurtleView>());
+            // queues and tables
             AddEmptyModelList("tables", new ModelWithViewCollection<TableModel, TableView>());
             foreach (JSONNode node in cafeJSON["tables"].Childs)
             {
                 GetModelCollection<TableModel>("tables").Add(LoadFromJson<TableModel>(node));
             }
             AddSingleModel("queue", LoadFromJson<QueueModel>(cafeJSON["queue"]));
-            AddSingleModel("seats", new SeatCollectionModel(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables")));
+            // seats
+            AddEmptyModelList("seats", new ModelWithViewCollection<SeatModel, SeatView>());
+            AddSingleModel("turtleAction", new TurtleActionModel());
+            AddSingleModel("seatCollection", new SeatCollectionModel() { Seats = GetModelCollection<SeatModel>("seats") });
+            GetModel<SeatCollectionModel>("seatCollection").Initialize(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables"));
+            // ui stuff
+            AddSingleModelWithView<UIModel, UIView>("ui", LoadFromJson<UIModel>(uiJSON["turtleProfile"]));
 
-            // Controllers
+            /* Controllers */
 
             AddController(new CameraController() { CameraModel = GetModel<CameraModel>("camera") });
-            AddController(new TurtleSpawnController() {
+            AddController(new TurtleSpawnController()
+            {
                 TurtleModels = GetModelCollection<TurtleModel>("turtles"),
-                SeatsModel = GetModel<SeatCollectionModel>("seats"),
-                TurtleDatabaseModel = GetModel<TurtleDatabaseModel>("turtleDatabase") });
-            AddController(new InputController() { MouseRayModel = GetModel<MouseInputModel>("mouseRayModel") });
-            AddController(new TurtleController() {
+                SeatsModel = GetModel<SeatCollectionModel>("seatCollection"),
+                TurtleDatabaseModel = GetModel<TurtleDatabaseModel>("turtleDatabase")
+            });
+            AddController(new InputController() { MouseRayModel = GetModel<MouseInputModel>("mouseRay") });
+            AddController(new TurtleController()
+            {
                 TurtleModels = GetModelCollection<TurtleModel>("turtles"),
-                MouseRayModel = GetModel<MouseInputModel>("mouseRayModel") });
+                MouseInputModel = GetModel<MouseInputModel>("mouseRay")
+            });
+            AddController(new SeatController()
+            {
+                SeatModels = GetModelCollection<SeatModel>("seats"),
+                MouseInputModel = GetModel<MouseInputModel>("mouseRay")
+            });
+            AddController(new TurtleActionController()
+            {
+                ActionModel = GetModel<TurtleActionModel>("turtleAction"),
+                SeatModels = GetModelCollection<SeatModel>("seats"),
+                TurtleModels = GetModelCollection<TurtleModel>("turtles")
+            });
+            AddController(new UIController()
+            {
+                UIModel = GetModel<UIModel>("ui"),
+                TurtleModels = GetModelCollection<TurtleModel>("turtles")
+            });
         }
 
         public override void Unload()

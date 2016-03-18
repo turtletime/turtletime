@@ -19,11 +19,6 @@ namespace TurtleTime.Controllers
             mousePrev = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
         }
 
-        public override bool IsActive()
-        {
-            return true;
-        }
-
         public override void Update(float deltaTime)
         {
             Vector2 dp = Vector2.zero;
