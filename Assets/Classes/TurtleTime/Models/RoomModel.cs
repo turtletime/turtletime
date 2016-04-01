@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CheloniiUnity;
+using UnityMVC;
 
 namespace TurtleTime.Models
 {
@@ -10,9 +10,9 @@ namespace TurtleTime.Models
     {
         String layoutName;
 
-        public RoomModel(String layoutName)
+        public RoomModel()
         {
-            this.layoutName = layoutName;
+            this.layoutName = "cafe_room";
         }
     }
 }

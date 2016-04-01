@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CheloniiUnity;
+using UnityMVC;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 using UnityEngine;
 
 namespace TurtleTime.Views
 {
     class CameraView : View3D<CameraModel>
     {
+        public override string NodeName { get { return "Camera"; } }
+
         protected override void Load()
         {
-            this.name = "Camera";
             UnityUtils.CreateCamera(this.gameObject);
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
             transform.position = Model.Position;
             transform.rotation = Model.Rotation;

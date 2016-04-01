@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace CheloniiUnity
+namespace UnityMVC
 {
     class ModelCollection<M> : ICollection<M> where M : Model
     {
@@ -43,6 +43,31 @@ namespace CheloniiUnity
             models.CopyTo(array, arrayIndex);
         }
 
+        public M GetOneModelSatisfyingPredicate(Predicate<M> predicate)
+        {
+            foreach (M model in models)
+            {
+                if (predicate(model))
+                {
+                    return model;
+                }
+            }
+            return null;
+        }
+
+        public ICollection<M> GetModelsSatisfyingPredicate(Predicate<M> predicate)
+        {
+            HashSet<M> result = new HashSet<M>();
+            foreach (M model in models)
+            {
+                if (predicate(model))
+                {
+                    result.Add(model);
+                }
+            }
+            return result;
+        }
+
         public IEnumerator<M> GetEnumerator()
         {
             return models.GetEnumerator();
@@ -67,6 +92,26 @@ namespace CheloniiUnity
         {
             GameObject view = new GameObject();
             view.AddComponent<V>().Model = item;
+            // 
+            GameObject root = GameObject.Find("3D Node");
+            bool parentFound = false;
+            foreach (Transform t in root.GetComponentsInChildren<Transform>())
+            {
+                if (t.name.Equals(item.GetType().Name))
+                {
+                    view.transform.SetParent(t);
+                    parentFound = true;
+                    break;
+                }
+            }
+            if (!parentFound)
+            {
+                GameObject t = new GameObject();
+                t.name = item.GetType().Name;
+                t.transform.SetParent(root.transform);
+                view.transform.SetParent(t.transform);
+            }
+            // 
             modelToView.Add(item, view);
             base.Add(item);
         }

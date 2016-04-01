@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using CheloniiUnity;
+using UnityMVC;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 
 namespace TurtleTime.Views
 {
     class TableView : View3D<TableModel>
     {
+        public override string NodeName { get { return "Table"; } }
+
         protected override void Load()
         {
-            this.name = "Table";
             UnityUtils.CreateMesh(gameObject, "table", "table", "Default-Diffuse");
             gameObject.GetComponent<Renderer>().material.color = Color.black;
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
             gameObject.transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position);
         }

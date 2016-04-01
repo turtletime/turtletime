@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using CheloniiUnity;
+using UnityMVC;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 
 namespace TurtleTime.Views
 {
     class MouseInputView : View3D<MouseInputModel>
     {
+        public override string NodeName { get { return "Mouse Input (Debug)"; } }
+
         protected override void Load()
         {
-            this.name = "Mouse Ray";
             UnityUtils.CreateMesh(gameObject, "mouseRay", "mouseRay", "Default-Diffuse");
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
             transform.position = Model.WorldSpaceRay.origin;
             transform.rotation = Quaternion.FromToRotation(Vector3.forward, Model.WorldSpaceRay.direction);

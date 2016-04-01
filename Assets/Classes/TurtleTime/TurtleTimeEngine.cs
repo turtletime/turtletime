@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CheloniiUnity;
+using UnityMVC;
 
 namespace TurtleTime
 {
     class TurtleTimeEngine : GameEngine
     {
-        public override void Initialize()
+        protected override void Initialize()
         {
             AddModule<CafeModule>();
         }

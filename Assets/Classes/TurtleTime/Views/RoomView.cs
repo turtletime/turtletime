@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CheloniiUnity;
+using UnityMVC;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 using UnityEngine;
 
 namespace TurtleTime.Views
@@ -12,6 +13,8 @@ namespace TurtleTime.Views
     {
         GameObject floor;
         GameObject walls;
+
+        public override string NodeName { get { return "Room"; } }
 
         protected override void Load()
         {
@@ -24,9 +27,9 @@ namespace TurtleTime.Views
             UnityUtils.CreateMesh(walls, "cafe_room", "cafe_walls", "cafe_wall_material");
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

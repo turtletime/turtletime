@@ -1,7 +1,8 @@
 {
   "camera": {
-    "position": [4, 6, 18.1],
-    "rotation": [20, 180, 0],
+    "position": [4, 6, 18],
+    "direction": [-60, -60, -60],
+    "up": [0, 0, 1],
     "scale": [1, 1, 1],
     "projection": "perspective",
     "fieldOfView": "15"

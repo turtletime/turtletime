@@ -2,22 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using CheloniiUnity;
+using UnityMVC;
 using UnityEngine;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 
 namespace TurtleTime.Views
 {
     class TurtleView : View3D<TurtleModel>
     {
+        public override string NodeName { get { return "Camera"; } }
+
         protected override void Load()
         {
-            this.name = "Turtle";
             UnityUtils.CreateMesh(gameObject, Model.StaticData.Name, "turtle", "cafe_floor_material");
             gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
             gameObject.transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position);
             gameObject.transform.localRotation = Quaternion.AngleAxis(Mathf.Rad2Deg * Mathf.Atan2(-Model.Direction.y, Model.Direction.x) - 90, Vector3.forward);

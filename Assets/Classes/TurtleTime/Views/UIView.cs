@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
-using CheloniiUnity;
+using UnityMVC;
 using TurtleTime.Models;
+using TurtleTime.Utils;
 using System;
 
 namespace TurtleTime.Views
@@ -9,9 +10,10 @@ namespace TurtleTime.Views
     {
         GameObject child;
 
+        public override string NodeName { get { return "UI View"; } }
+
         protected override void Load()
         {
-            name = "UI View";
             child = new GameObject("Rainbow");
             child.transform.SetParent(transform);
             UnityUtils.CreateImage(child, "test");
@@ -20,7 +22,7 @@ namespace TurtleTime.Views
             child.transform.localPosition = a.EvaluateWithRectangle(ViewportRect);
         }
 
-        public override void Update()
+        protected override void UpdateView()
         {
             child.SetActive(Model.Active);
         }
