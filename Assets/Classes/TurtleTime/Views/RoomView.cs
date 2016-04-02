@@ -29,7 +29,7 @@ namespace TurtleTime.Views
 
         protected override void UpdateView()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

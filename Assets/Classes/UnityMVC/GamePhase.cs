@@ -82,28 +82,12 @@ namespace UnityMVC
             AddModel<M, V>(key, new M());
         }
 
-        private void AddModel<M, V>(String key, M model) where M : Model where V : View<M>
+        protected void AddModel<M, V>(String key, M model) where M : Model where V : View<M>
         {
             GameObject view = new GameObject();
             view.AddComponent<V>().Model = model;
             GameObject root = GameObject.Find("3D Node");
-            bool parentFound = false;
-            foreach (Transform t in root.GetComponentsInChildren<Transform>())
-            {
-                if (t.name.Equals(model.GetType().Name))
-                {
-                    view.transform.SetParent(t);
-                    parentFound = true;
-                    break;
-                }
-            }
-            if (!parentFound)
-            {
-                GameObject t = new GameObject();
-                t.name = model.GetType().Name;
-                t.transform.SetParent(root.transform);
-                view.transform.SetParent(t.transform);
-            }
+            view.transform.SetParent(root.transform);
             models.Add(key, model);
         }
 

@@ -94,23 +94,7 @@ namespace UnityMVC
             view.AddComponent<V>().Model = item;
             // 
             GameObject root = GameObject.Find("3D Node");
-            bool parentFound = false;
-            foreach (Transform t in root.GetComponentsInChildren<Transform>())
-            {
-                if (t.name.Equals(item.GetType().Name))
-                {
-                    view.transform.SetParent(t);
-                    parentFound = true;
-                    break;
-                }
-            }
-            if (!parentFound)
-            {
-                GameObject t = new GameObject();
-                t.name = item.GetType().Name;
-                t.transform.SetParent(root.transform);
-                view.transform.SetParent(t.transform);
-            }
+            view.transform.SetParent(root.transform);
             // 
             modelToView.Add(item, view);
             base.Add(item);

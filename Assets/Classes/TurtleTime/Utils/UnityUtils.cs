@@ -10,7 +10,6 @@ namespace TurtleTime.Utils
     static class UnityUtils
     {
         public static readonly Quaternion GLOBAL_ROTATION = Quaternion.Euler(new Vector3(270, 180, 0));
-        public static readonly Quaternion GLOBAL_ROTATION_INV = Quaternion.Euler(new Vector3(-270, -180, 0));
 
         public static void CreateCamera(GameObject gameObject)
         {
@@ -30,7 +29,7 @@ namespace TurtleTime.Utils
                     break;
                 }
             }
-            filter.transform.localRotation = Quaternion.identity;
+            filter.transform.localRotation = GLOBAL_ROTATION;
             Material material = Resources.Load<Material>("Models/Materials/" + matName);
             if (material != null)
             {
