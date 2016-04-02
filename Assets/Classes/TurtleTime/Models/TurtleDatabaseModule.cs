@@ -3,7 +3,6 @@ using UnityMVC;
 using TurtleTime.Models;
 using System.IO;
 using System.Collections.Generic;
-using SimpleJSON;
 
 namespace TurtleTime.Models
 {
@@ -16,9 +15,9 @@ namespace TurtleTime.Models
             TurtleData = new Dictionary<string, TurtleDataModel>();
         }
 
-        public override void LoadFromJson(JSONNode jsonNode)
+        public override void LoadFromJson(IJsonObject jsonNode)
         {
-            foreach (JSONNode child in jsonNode.Childs)
+            foreach (IJsonObject child in jsonNode.Children)
             {
                 TurtleDataModel turtle = new TurtleDataModel();
                 turtle.LoadFromJson(child);

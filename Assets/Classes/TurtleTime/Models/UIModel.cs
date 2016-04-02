@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityMVC;
-using SimpleJSON;
-using UnityEngine;
+﻿using UnityMVC;
 
 namespace TurtleTime.Models
 {
@@ -21,7 +15,7 @@ namespace TurtleTime.Models
             }
         }
 
-        public override void LoadFromJson(JSONNode jsonNode)
+        public override void LoadFromJson(IJsonObject jsonNode)
         {
             EdgePaddingPixels = jsonNode["edgePadding"].AsInt;
         }

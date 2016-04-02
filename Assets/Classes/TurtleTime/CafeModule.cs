@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityEngine;
-using UnityMVC;
+﻿using UnityMVC;
 using TurtleTime.Models;
 using TurtleTime.Controllers;
 using TurtleTime.Views;
-using TurtleTime.Utils;
-using SimpleJSON;
 
 namespace TurtleTime
 {
@@ -17,7 +10,7 @@ namespace TurtleTime
     /// </summary>
     class CafeModule : GamePhase
     {
-        private static T LoadFromJson<T>(JSONNode node) where T : Model, new()
+        private static T LoadFromJson<T>(IJsonObject node) where T : Model, new()
         {
             T result = new T();
             result.LoadFromJson(node);
@@ -26,27 +19,21 @@ namespace TurtleTime
 
         public override void Load()
         {
-            /* Load JSON */
-
-            JSONNode cafeJSON = TurtleUtils.LoadJSONConfig("cafe");
-            JSONNode turtleJSON = TurtleUtils.LoadJSONConfig("turtles");
-            JSONNode uiJSON = TurtleUtils.LoadJSONConfig("ui");
-
             /* Models */
 
-            AddModel<TurtleDatabaseModel>("turtleDatabase", turtleJSON["turtles"]);
-            AddModel<CameraModel, CameraView>("camera", cafeJSON["camera"]);
+            AddModel<TurtleDatabaseModel>("turtleDatabase", ReadOnlyData.JsonData["turtles"]["turtles"]);
+            AddModel<CameraModel, CameraView>("camera", ReadOnlyData.JsonData["cafe"]["camera"]);
             AddModel<MouseInputModel, MouseInputView>("mouseRay");
             AddModel<RoomModel, RoomView>("cafeRoom");
             // turtles
             AddModelCollection<TurtleModel, TurtleView>("turtles");
             // queues and tables
             AddModelCollection<TableModel, TableView>("tables");
-            foreach (JSONNode node in cafeJSON["tables"].Childs)
+            foreach (IJsonObject node in ReadOnlyData.JsonData["cafe"]["tables"].Children)
             {
                 GetModelCollection<TableModel>("tables").Add(LoadFromJson<TableModel>(node));
             }
-            AddModel<QueueModel>("queue", cafeJSON["queue"]);
+            AddModel<QueueModel>("queue", ReadOnlyData.JsonData["cafe"]["queue"]);
             // seats
             AddModelCollection<SeatModel, SeatView>("seats");
             AddModel<TurtleActionModel>("turtleAction");
@@ -54,7 +41,7 @@ namespace TurtleTime
             GetModel<SeatCollectionModel>("seatCollection").Seats = GetModelCollection<SeatModel>("seats");
             GetModel<SeatCollectionModel>("seatCollection").Initialize(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables"));
             // ui stuff
-            AddModel<UIModel, UIView>("ui", uiJSON["turtleProfile"]);
+            AddModel<UIModel, UIView>("ui", ReadOnlyData.JsonData["ui"]["turtleProfile"]);
 
             /* Controllers */
 

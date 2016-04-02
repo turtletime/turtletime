@@ -38,25 +38,5 @@ namespace TurtleTime
                 worldCoordinates.z / CAFE_COORDINATE_SCALE,
                 worldCoordinates.y / CAFE_COORDINATE_SCALE);
         }
-
-        public static JSONNode LoadJSONConfig(string name)
-        {
-            string path = "Config/" + name;
-            TextAsset t = Resources.Load<TextAsset>(path);
-            if (t == null)
-            {
-                Debug.LogWarning(path + " not found.");
-                return null;
-            }
-            try
-            {
-                return JSONNode.Parse(t.text);
-            }
-            catch
-            {
-                Debug.LogWarning(path + " could not be loaded.");
-                return null;
-            }
-        }
     }
 }

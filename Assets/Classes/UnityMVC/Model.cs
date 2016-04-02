@@ -23,6 +23,6 @@ namespace UnityMVC
         /// Loads this model from a parsed JSON node.
         /// </summary>
         /// <param name="jsonNode">The parsed JSON node from which Model data should be loaded.</param>
-        public virtual void LoadFromJson(JSONNode jsonNode) { }
+        public virtual void LoadFromJson(IJsonObject jsonNode) { }
     }
 }

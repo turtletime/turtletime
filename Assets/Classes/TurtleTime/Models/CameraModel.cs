@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityMVC;
-using SimpleJSON;
+﻿using UnityMVC;
 using UnityEngine;
-using TurtleTime.Views;
 
 namespace TurtleTime.Models
 {
@@ -15,7 +11,7 @@ namespace TurtleTime.Models
         public CameraProjection Projection { get; set; }
         public float FieldOfView { get; set; }
 
-        public override void LoadFromJson(JSONNode jsonNode)
+        public override void LoadFromJson(IJsonObject jsonNode)
         {
             Position = ToVector3(jsonNode["position"]);
             if (jsonNode["rotation"] != null)
@@ -23,11 +19,11 @@ namespace TurtleTime.Models
                 Rotation = Quaternion.Euler(ToVector3(jsonNode["rotation"]));
             }
             Scale = ToVector3(jsonNode["scale"]);
-            Projection = jsonNode["projection"].Value.Equals("perspective") ? CameraProjection.PERSPECTIVE : CameraProjection.ORTHOGRAPHIC;
+            Projection = jsonNode["projection"].AsString.Equals("perspective") ? CameraProjection.PERSPECTIVE : CameraProjection.ORTHOGRAPHIC;
             FieldOfView = jsonNode["fieldOfView"] != null ? jsonNode["fieldOfView"].AsFloat : 0;
         }
 
-        private static Vector3 ToVector3(JSONNode node)
+        private static Vector3 ToVector3(IJsonObject node)
         {
             return new Vector3(node[0].AsFloat, node[1].AsFloat, node[2].AsFloat);
         }

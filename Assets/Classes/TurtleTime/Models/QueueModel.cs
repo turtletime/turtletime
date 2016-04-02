@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UnityMVC;
-using SimpleJSON;
+﻿using UnityMVC;
 using UnityEngine;
 
 namespace TurtleTime.Models
@@ -15,7 +10,7 @@ namespace TurtleTime.Models
         public Vector2 FacingDirection { get; set; }
         public int NumSeats { get; set; }
 
-        public override void LoadFromJson(JSONNode jsonNode)
+        public override void LoadFromJson(IJsonObject jsonNode)
         {
             Position = new Vector2(jsonNode["position"][0].AsInt, jsonNode["position"][1].AsInt);
             SeatExtensionDirection = new Vector2(jsonNode["direction"][0].AsInt, jsonNode["direction"][1].AsInt);

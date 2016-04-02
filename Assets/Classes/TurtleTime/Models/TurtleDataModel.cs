@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityMVC;
-using SimpleJSON;
 
 namespace TurtleTime.Models
 {
@@ -12,10 +11,10 @@ namespace TurtleTime.Models
         public String Name { get; private set; }
         public String FriendlyName { get; private set; }
 
-        public override void LoadFromJson(JSONNode jsonNode)
+        public override void LoadFromJson(IJsonObject jsonNode)
         {
-            Name = jsonNode["name"];
-            FriendlyName = jsonNode["friendlyName"];
+            Name = jsonNode["name"].AsString;
+            FriendlyName = jsonNode["friendlyName"].AsString;
         }
     }
 }

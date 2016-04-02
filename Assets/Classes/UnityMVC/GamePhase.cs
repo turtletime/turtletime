@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using SimpleJSON;
 
 namespace UnityMVC
 {
@@ -70,7 +69,7 @@ namespace UnityMVC
             models.Add(key, model);
         }
 
-        protected void AddModel<M>(String key, JSONNode jsonNode) where M : Model, new()
+        protected void AddModel<M>(String key, IJsonObject jsonNode) where M : Model, new()
         {
             M model = new M();
             model.LoadFromJson(jsonNode);
@@ -98,7 +97,7 @@ namespace UnityMVC
             AddModel<M, V>(key, model);
         }
 
-        protected void AddModel<M, V>(String key, JSONNode jsonNode) where M : Model, new() where V : View<M>
+        protected void AddModel<M, V>(String key, IJsonObject jsonNode) where M : Model, new() where V : View<M>
         {
             M model = new M();
             model.LoadFromJson(jsonNode);
