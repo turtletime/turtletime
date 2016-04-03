@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace TurtleTime
+namespace TurtleTime.Models
 {
     interface IPhysicalModel
     {

@@ -12,6 +12,8 @@ namespace UnityMVC
 
         public abstract String NodeName { get; }
 
+        public abstract String NodeParent { get; }
+
         public void Start()
         {
             Load();
@@ -33,15 +35,18 @@ namespace UnityMVC
         protected virtual void UpdateModel() { }
 
         protected abstract void UpdateView();
+
     }
 
     abstract class View3D<T> : View<T> where T : Model
     {
-        
+        public override string NodeParent { get { return "3D Node"; } }
     }
 
     abstract class ViewUI<T> : View<T> where T : Model
     {
+        public override string NodeParent { get { return "UI Node"; } }
+
         protected Rect ViewportRect { get { return transform.GetComponentInParent<RectTransform>().rect; } }
     }
 }

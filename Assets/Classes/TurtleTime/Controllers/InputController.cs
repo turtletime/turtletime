@@ -20,6 +20,7 @@ namespace TurtleTime.Controllers
                 MouseRayModel.WorldSpaceRay = currentCamera.ViewportPointToRay(currentCamera.ScreenToViewportPoint(Input.mousePosition));
                 MouseRayModel.WorldSpaceRay = new Ray(MouseRayModel.WorldSpaceRay.origin,
                     MouseRayModel.WorldSpaceRay.direction);
+                MouseRayModel.ScreenSpacePoint = currentCamera.ScreenToViewportPoint(Input.mousePosition);
             }
             MouseRayModel.IsClicked = Input.GetMouseButton(0);
         }

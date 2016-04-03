@@ -93,7 +93,7 @@ namespace UnityMVC
             GameObject view = new GameObject();
             view.AddComponent<V>().Model = item;
             // 
-            GameObject root = GameObject.Find("3D Node");
+            GameObject root = GameObject.Find(view.GetComponent<V>().NodeParent);
             view.transform.SetParent(root.transform);
             // 
             modelToView.Add(item, view);

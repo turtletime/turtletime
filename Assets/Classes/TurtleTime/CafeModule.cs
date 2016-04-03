@@ -2,6 +2,7 @@
 using TurtleTime.Models;
 using TurtleTime.Controllers;
 using TurtleTime.Views;
+using UnityEngine;
 
 namespace TurtleTime
 {
@@ -19,6 +20,8 @@ namespace TurtleTime
 
         public override void Load()
         {
+            GameObject.Find("UI").GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+
             /* Models */
 
             AddModel<TurtleDatabaseModel>("turtleDatabase", ReadOnlyData.JsonData["turtles"]["turtles"]);
@@ -41,7 +44,7 @@ namespace TurtleTime
             GetModel<SeatCollectionModel>("seatCollection").Seats = GetModelCollection<SeatModel>("seats");
             GetModel<SeatCollectionModel>("seatCollection").Initialize(GetModel<QueueModel>("queue"), GetModelCollection<TableModel>("tables"));
             // ui stuff
-            AddModel<UIModel, UIView>("ui", ReadOnlyData.JsonData["ui"]["turtleProfile"]);
+            AddModel<TurtleTimeUIModel, UIView>("ui", ReadOnlyData.JsonData["ui"]["turtleProfile"]);
 
             /* Controllers */
 
@@ -71,7 +74,7 @@ namespace TurtleTime
             });
             AddController(new UIController()
             {
-                UIModel = GetModel<UIModel>("ui"),
+                UIModel = GetModel<TurtleTimeUIModel>("ui"),
                 TurtleModels = GetModelCollection<TurtleModel>("turtles")
             });
         }

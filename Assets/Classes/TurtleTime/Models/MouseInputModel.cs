@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityMVC;
+using UnityMVC.UI;
 using UnityEngine;
-using TurtleTime.Views;
 
 namespace TurtleTime.Models
 {
     class MouseInputModel : Model
     {
         public Ray WorldSpaceRay { get; set; }
+        public Vector2 ScreenSpacePoint { get; set; }
 
         public bool JustClicked
         {
@@ -48,6 +46,11 @@ namespace TurtleTime.Models
                 intersects = intersects && Math.Abs(entryPoint.y - physicalModel.Position.y) < 0.5f;
             }
             return intersects;
+        }
+
+        public bool Intersects(AbstractUIModel uiModel)
+        {
+            return uiModel.Rectangle.Contains(ScreenSpacePoint);
         }
     }
 }

@@ -6,7 +6,7 @@ using System;
 
 namespace TurtleTime.Views
 {
-    class UIView : ViewUI<UIModel>
+    class UIView : ViewUI<TurtleTimeUIModel>
     {
         GameObject child;
 

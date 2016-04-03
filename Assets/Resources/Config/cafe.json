@@ -1,11 +1,9 @@
 {
   "camera": {
-    "position": [4, 6, 18],
-    "direction": [-60, -60, -60],
-    "up": [0, 0, 1],
+    "position": [4, 16, 18],
+    "rotation": [45, 180, 0],
     "scale": [1, 1, 1],
-    "projection": "perspective",
-    "fieldOfView": "15"
+    "projection": "orthographic"
   },
   "tables": [
     { "position": [2, 5] },

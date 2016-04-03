@@ -1,8 +1,11 @@
-﻿using UnityMVC;
+﻿using System;
+using UnityEngine;
+using UnityMVC;
+using UnityMVC.UI;
 
 namespace TurtleTime.Models
 {
-    class UIModel : Model
+    class TurtleTimeUIModel : AbstractUIModel
     {
         public TurtleModel CurrentTurtleModel { get; set; }
         public int EdgePaddingPixels { get; set; }
@@ -14,6 +17,7 @@ namespace TurtleTime.Models
                 return CurrentTurtleModel != null;
             }
         }
+
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {

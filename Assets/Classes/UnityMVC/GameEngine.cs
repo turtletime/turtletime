@@ -33,6 +33,10 @@ namespace UnityMVC
         {
             GameObject child3D = new GameObject("3D Node");
             child3D.transform.SetParent(this.transform);
+            GameObject childUI = new GameObject("UI Node");
+            childUI.AddComponent<Canvas>();
+            childUI.GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
+            childUI.transform.SetParent(this.transform);
             Initialize();
         }
 

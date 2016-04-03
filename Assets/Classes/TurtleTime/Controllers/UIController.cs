@@ -9,7 +9,7 @@ namespace TurtleTime.Controllers
 {
     class UIController : Controller
     {
-        public UIModel UIModel { get; set; }
+        public TurtleTimeUIModel UIModel { get; set; }
         public ModelCollection<TurtleModel> TurtleModels { get; set; }
 
         public override void Update(float deltaTime)
