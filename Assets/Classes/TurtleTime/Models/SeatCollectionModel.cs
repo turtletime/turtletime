@@ -2,7 +2,7 @@
 using UnityMVC;
 using System.Collections.Generic;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class SeatCollectionModel : Model
     {

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 using UnityMVC;
-using TurtleTime.Models;
-using TurtleTime.Utils;
 
-namespace TurtleTime.Views
+namespace TurtleTime
 {
     class MouseInputView : View3D<MouseInputModel>
     {

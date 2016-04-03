@@ -1,10 +1,8 @@
 ﻿using UnityEngine;
 using UnityMVC;
-using TurtleTime.Models;
-using TurtleTime.Utils;
 using System;
 
-namespace TurtleTime.Views
+namespace TurtleTime
 {
     class UIView : ViewUI<TurtleTimeUIModel>
     {

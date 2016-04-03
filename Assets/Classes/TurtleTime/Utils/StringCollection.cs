@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace TurtleTime.Utils
+namespace TurtleTime
 {
     /// <summary>
     /// A class which represents a directory of strings loaded from a file.

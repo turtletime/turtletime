@@ -1,10 +1,9 @@
 ﻿using System;
 using UnityMVC;
-using TurtleTime.Models;
 using System.IO;
 using System.Collections.Generic;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class TurtleDatabaseModel : Model
     {

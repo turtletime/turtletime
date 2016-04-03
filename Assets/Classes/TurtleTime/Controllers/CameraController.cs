@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using UnityMVC;
 using UnityEngine;
-using TurtleTime.Models;
 
-namespace TurtleTime.Controllers
+namespace TurtleTime
 {
     class CameraController : Controller
     {

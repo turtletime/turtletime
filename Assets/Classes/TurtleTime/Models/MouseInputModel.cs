@@ -3,7 +3,7 @@ using UnityMVC;
 using UnityMVC.UI;
 using UnityEngine;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class MouseInputModel : Model
     {
@@ -34,7 +34,7 @@ namespace TurtleTime.Models
         private bool clickedThisFrame;
         private bool clickedLastFrame;
 
-        public bool Intersects(IPhysicalModel physicalModel)
+        public bool Intersects(PhysicalModel physicalModel)
         {
             Plane p = new Plane(Vector3.up, 0);
             float enter;

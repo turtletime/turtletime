@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityMVC;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class TurtleDataModel : Model
     {

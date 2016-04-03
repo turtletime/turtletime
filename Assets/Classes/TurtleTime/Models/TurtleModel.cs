@@ -6,17 +6,15 @@ using UnityMVC;
 using SimpleJSON;
 using UnityEngine;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
-    class TurtleModel : Model, IPhysicalModel
+    class TurtleModel : PhysicalModel
     {
         private SeatModel targetSeat;
 
         public TurtleDataModel StaticData { get; set; }
         public float ProgressToTargetSeat { get; set; }
         public bool Selected { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Direction { get; set; }
 
         public SeatModel TargetSeat
         {
@@ -44,6 +42,12 @@ namespace TurtleTime.Models
                 turtleModel.Direction = seatModel.Direction;
                 seatModel.Taken = true;
             }
+        }
+
+        public class View : BillboardSpriteView<TurtleModel>
+        {
+            public override string NodeName { get { return "Turtle"; } }
+            protected override string SpriteName { get { return "test"; } }
         }
     }
 }

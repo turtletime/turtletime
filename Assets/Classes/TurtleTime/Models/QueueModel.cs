@@ -1,7 +1,7 @@
 ﻿using UnityMVC;
 using UnityEngine;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class QueueModel : Model
     {

@@ -1,7 +1,4 @@
 ﻿using UnityMVC;
-using TurtleTime.Models;
-using TurtleTime.Controllers;
-using TurtleTime.Views;
 using UnityEngine;
 
 namespace TurtleTime
@@ -29,16 +26,16 @@ namespace TurtleTime
             AddModel<MouseInputModel, MouseInputView>("mouseRay");
             AddModel<RoomModel, RoomView>("cafeRoom");
             // turtles
-            AddModelCollection<TurtleModel, TurtleView>("turtles");
+            AddModelCollection<TurtleModel, TurtleModel.View>("turtles");
             // queues and tables
-            AddModelCollection<TableModel, TableView>("tables");
+            AddModelCollection<TableModel, TableModel.View>("tables");
             foreach (IJsonObject node in ReadOnlyData.JsonData["cafe"]["tables"].Children)
             {
                 GetModelCollection<TableModel>("tables").Add(LoadFromJson<TableModel>(node));
             }
             AddModel<QueueModel>("queue", ReadOnlyData.JsonData["cafe"]["queue"]);
             // seats
-            AddModelCollection<SeatModel, SeatView>("seats");
+            AddModelCollection<SeatModel, SeatModel.View>("seats");
             AddModel<TurtleActionModel>("turtleAction");
             AddModel<SeatCollectionModel>("seatCollection");
             GetModel<SeatCollectionModel>("seatCollection").Seats = GetModelCollection<SeatModel>("seats");

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityMVC;
 using UnityMVC.UI;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
     class TurtleTimeUIModel : AbstractUIModel
     {

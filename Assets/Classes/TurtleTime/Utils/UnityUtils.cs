@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-namespace TurtleTime.Utils
+namespace TurtleTime
 {
     /// <summary>
     /// A collection of methods which help the game interface with Unity's GameObject objects.

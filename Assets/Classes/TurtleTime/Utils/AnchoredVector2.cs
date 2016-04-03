@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace TurtleTime.Utils
+namespace TurtleTime
 {
     /// <summary>
     /// A struct that represents a 2D position as a an offset from either a corner or a side of a rectangle.

@@ -5,13 +5,17 @@ using System.Text;
 using UnityEngine;
 using UnityMVC;
 
-namespace TurtleTime.Models
+namespace TurtleTime
 {
-    class SeatModel : Model, IPhysicalModel
+    class SeatModel : PhysicalModel
     {
         public bool Taken { get; set; }
         public bool Selected { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 Direction { get; set; }
+
+        public class View : BillboardSpriteView<SeatModel>
+        {
+            public override string NodeName { get { return "Seat"; } }
+            protected override string SpriteName { get { return "test"; } }
+        }
     }
 }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using TurtleTime.Models;
 using UnityMVC;
 
-namespace TurtleTime.Controllers
+namespace TurtleTime
 {
     class InputController : Controller
     {

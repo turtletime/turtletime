@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityMVC;
-using TurtleTime.Models;
-using TurtleTime.Utils;
 using UnityEngine;
 
-namespace TurtleTime.Views
+namespace TurtleTime
 {
     class RoomView : View3D<RoomModel>
     {
