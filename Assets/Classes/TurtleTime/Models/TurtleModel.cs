@@ -10,7 +10,7 @@ namespace TurtleTime
 {
     class TurtleModel : WorldObjectModel
     {
-        public override string SpriteReferenceTag { get { return "test"; } }
+        public override string SpriteReferenceTag { get { return "turtle"; } }
 
         private SeatModel targetSeat;
 
@@ -50,8 +50,31 @@ namespace TurtleTime
         {
             protected override void UpdateView()
             {
+                spriteRenderer.color = Model.Selected ? Color.red : Color.white;
                 base.UpdateView();
-                GetComponent<SpriteRenderer>().color = Model.Selected ? Color.red : Color.white;
+            }
+
+            protected override string CurrentAnimation
+            {
+                get
+                {
+                    if (Model.Direction.x > 0)
+                    {
+                        return "idle_l";
+                    }
+                    else if (Model.Direction.x < 0)
+                    {
+                        return "idle_r";
+                    }
+                    else if (Model.Direction.y < 0)
+                    {
+                        return "idle_b";
+                    }
+                    else
+                    {
+                        return "idle_f";
+                    }
+                }
             }
         }
     }

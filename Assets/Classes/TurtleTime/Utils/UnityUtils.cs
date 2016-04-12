@@ -47,12 +47,6 @@ namespace TurtleTime
             image.sprite = Resources.Load<Sprite>("Images/" + spriteName);
         }
 
-        public static void CreateSprite(GameObject gameObject, string spriteName)
-        {
-            SpriteRenderer spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-            spriteRenderer.sprite = Resources.Load<Sprite>("Sprites/" + spriteName);
-        }
-
         public static void CreateText(GameObject gameObject, string font, int fontSize, TextAnchor alignment = TextAnchor.MiddleCenter)
         {
             Text text = gameObject.AddComponent<Text>();

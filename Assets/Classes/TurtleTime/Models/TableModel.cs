@@ -9,13 +9,22 @@ namespace TurtleTime
 {
     class TableModel : WorldObjectModel
     {
-        public override string SpriteReferenceTag { get { return "test"; } }
+        public override string SpriteReferenceTag { get { return "table"; } }
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {
             Position = new Vector2(jsonNode["position"][0].AsInt, jsonNode["position"][1].AsInt);
         }
 
-        public class View : BillboardSpriteView<TableModel> { }
+        public class View : BillboardSpriteView<TableModel>
+        {
+            protected override string CurrentAnimation
+            {
+                get
+                {
+                    return "default";
+                }
+            }
+        }
     }
 }
