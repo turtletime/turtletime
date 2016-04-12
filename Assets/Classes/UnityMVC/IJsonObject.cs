@@ -14,7 +14,8 @@ namespace UnityMVC
         int AsInt { get; }
         float AsFloat { get; }
         bool AsBoolean { get; }
-        IEnumerable<IJsonObject> Children { get; }
+        List<IJsonObject> AsList { get; }
+        Dictionary<string, IJsonObject> AsDictionary { get; }
         IJsonObject this[int index] { get; }
         IJsonObject this[string key] { get; }
     }

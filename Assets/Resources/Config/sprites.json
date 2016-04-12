@@ -1,0 +1,41 @@
+{
+  "templates": {
+    "single_view": {
+      "columns": "1",
+      "rows": "1",
+      "frameDuration": 1,
+      "animations": {
+        "any": [0]
+      }
+    },
+    "idle_only": {
+      "columns": "4",
+      "rows": "1",
+      "frameDuration": 1,
+      "animations": {
+        "idle_f": [0],
+        "idle_l": [1],
+        "idle_r": [2],
+        "idle_b": [3]
+      }
+    }
+  },
+  "sprites": {
+    "test": {
+      "template": "single_view",
+      "resourceName": "test"
+    },
+    "table": {
+      "template": "single_view",
+      "resourceName": "table"
+    },
+    "seat": {
+      "template": "idle_only",
+      "resourceName": "chair"
+    },
+    "turtle": {
+      "template": "idle_only",
+      "resourceName": "turtle"
+    }
+  }
+}

@@ -16,7 +16,7 @@ namespace TurtleTime
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {
-            foreach (IJsonObject child in jsonNode.Children)
+            foreach (IJsonObject child in jsonNode.AsList)
             {
                 TurtleDataModel turtle = new TurtleDataModel();
                 turtle.LoadFromJson(child);

@@ -29,7 +29,7 @@ namespace TurtleTime
             AddModelCollection<TurtleModel, TurtleModel.View>("turtles");
             // queues and tables
             AddModelCollection<TableModel, TableModel.View>("tables");
-            foreach (IJsonObject node in ReadOnlyData.JsonData["cafe"]["tables"].Children)
+            foreach (IJsonObject node in ReadOnlyData.JsonData["cafe"]["tables"].AsList)
             {
                 GetModelCollection<TableModel>("tables").Add(LoadFromJson<TableModel>(node));
             }

@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UnityEngine;
 using UnityMVC;
 
 namespace TurtleTime
 {
-    class PhysicalModel : Model
+    abstract class WorldObjectModel : Model, IPhysicalModel, ISpriteModel
     {
         public Vector2 Position { get; set; }
         public Vector2 Direction { get; set; }
+
+        public abstract string SpriteReferenceTag { get; }
     }
 }

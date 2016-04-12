@@ -7,15 +7,20 @@ using UnityMVC;
 
 namespace TurtleTime
 {
-    class SeatModel : PhysicalModel
+    class SeatModel : WorldObjectModel
     {
+        public override string SpriteReferenceTag { get { return "test"; } }
+
         public bool Taken { get; set; }
         public bool Selected { get; set; }
 
         public class View : BillboardSpriteView<SeatModel>
         {
-            public override string NodeName { get { return "Seat"; } }
-            protected override string SpriteName { get { return "test"; } }
+            protected override void UpdateView()
+            {
+                base.UpdateView();
+                GetComponent<SpriteRenderer>().color = Model.Selected ? Color.red : Color.white;
+            }
         }
     }
 }

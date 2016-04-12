@@ -9,19 +9,22 @@ namespace UnityMVC
     abstract class View<T> : MonoBehaviour where T : Model
     {
         public T Model { get; set; }
+        private bool loaded = false;
 
         public abstract String NodeName { get; }
 
         public abstract String NodeParent { get; }
 
-        public void Start()
-        {
-            Load();
-            this.name = NodeName;
-        }
+        public void Start() { }
 
         public void Update()
         {
+            if (!loaded)
+            {
+                this.name = NodeName;
+                Load();
+                loaded = true;
+            }
             UpdateView();
         }
 

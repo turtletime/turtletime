@@ -60,7 +60,15 @@ namespace UnityMVC.JsonObject
             }
         }
 
-        public IEnumerable<IJsonObject> Children
+        public List<IJsonObject> AsList
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public Dictionary<string, IJsonObject> AsDictionary
         {
             get
             {

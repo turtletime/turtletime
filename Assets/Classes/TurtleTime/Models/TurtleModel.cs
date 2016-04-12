@@ -8,8 +8,10 @@ using UnityEngine;
 
 namespace TurtleTime
 {
-    class TurtleModel : PhysicalModel
+    class TurtleModel : WorldObjectModel
     {
+        public override string SpriteReferenceTag { get { return "test"; } }
+
         private SeatModel targetSeat;
 
         public TurtleDataModel StaticData { get; set; }
@@ -46,8 +48,11 @@ namespace TurtleTime
 
         public class View : BillboardSpriteView<TurtleModel>
         {
-            public override string NodeName { get { return "Turtle"; } }
-            protected override string SpriteName { get { return "test"; } }
+            protected override void UpdateView()
+            {
+                base.UpdateView();
+                GetComponent<SpriteRenderer>().color = Model.Selected ? Color.red : Color.white;
+            }
         }
     }
 }

@@ -34,7 +34,7 @@ namespace TurtleTime
         private bool clickedThisFrame;
         private bool clickedLastFrame;
 
-        public bool Intersects(PhysicalModel physicalModel)
+        public bool Intersects(IPhysicalModel physicalModel)
         {
             Plane p = new Plane(Vector3.up, 0);
             float enter;

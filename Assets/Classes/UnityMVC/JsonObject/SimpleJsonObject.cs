@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SimpleJSON;
 
 namespace UnityMVC.JsonObject
@@ -51,6 +52,20 @@ namespace UnityMVC.JsonObject
             }
         }
 
+        public Dictionary<string, IJsonObject> AsDictionary
+        {
+            get
+            {
+                Dictionary<string, IJsonObject> result = new Dictionary<string, IJsonObject>();
+                foreach (var child in underlyingNode.AsObject)
+                {
+                    KeyValuePair<string, JSONNode> pair = (KeyValuePair<string, JSONNode>)child;
+                    result.Add(pair.Key, new SimpleJsonObject(pair.Value));
+                }
+                return result;
+            }
+        }
+
         public float AsFloat
         {
             get
@@ -64,6 +79,19 @@ namespace UnityMVC.JsonObject
             get
             {
                 return underlyingNode.AsInt;
+            }
+        }
+
+        public List<IJsonObject> AsList
+        {
+            get
+            {
+                List<IJsonObject> result = new List<IJsonObject>();
+                foreach (JSONNode jsonNode in underlyingNode.AsArray)
+                {
+                    result.Add(new SimpleJsonObject(jsonNode));
+                }
+                return result;
             }
         }
 
