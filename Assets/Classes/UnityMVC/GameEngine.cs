@@ -9,14 +9,14 @@ namespace UnityMVC
     /// </summary>
     abstract class GameEngine : MonoBehaviour
     {
-        private Dictionary<Type, GamePhase> gameControllerMap = new Dictionary<Type, GamePhase>();
-        private List<GamePhase> gameControllerList = new List<GamePhase>();
+        private Dictionary<Type, GameModule> gameControllerMap = new Dictionary<Type, GameModule>();
+        private List<GameModule> gameControllerList = new List<GameModule>();
 
         public float DeltaTime = 1/60f;
 
         protected abstract void Initialize();
 
-        protected void AddModule<Module>() where Module : GamePhase, new()
+        protected void AddModule<Module>() where Module : GameModule, new()
         {
             Module module = new Module();
             gameControllerList.Add(module);
@@ -24,7 +24,7 @@ namespace UnityMVC
             module.Load();
         }
 
-        public T GetModule<T>() where T : GamePhase
+        public T GetModule<T>() where T : GameModule
         {
             return gameControllerMap[typeof(T)] as T;
         }
@@ -42,7 +42,7 @@ namespace UnityMVC
 
         public void Update()
         {
-            foreach (GamePhase module in gameControllerList)
+            foreach (GameModule module in gameControllerList)
             {
                 module.UpdateMain(DeltaTime);
             }

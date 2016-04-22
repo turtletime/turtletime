@@ -14,6 +14,8 @@ namespace TurtleTime
         public override void LoadFromJson(IJsonObject jsonNode)
         {
             Position = new Vector2(jsonNode["position"][0].AsInt, jsonNode["position"][1].AsInt);
+            Width = 4;
+            Height = 4;
         }
 
         public class View : BillboardSpriteView<TableModel>

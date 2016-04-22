@@ -5,7 +5,7 @@ namespace TurtleTime
 {
     static class TurtleUtils
     {
-        public static readonly float CAFE_COORDINATE_SCALE = 0.5f;
+        public static readonly float CAFE_COORDINATE_SCALE = 0.25f;
         public static readonly Vector2 CAFE_COORDINATE_OFFSET = new Vector2(0.5f, 0.5f);
 
         public static Vector3 CafeSpaceToWorldCoordinates(Vector2 cafeCoordinates)

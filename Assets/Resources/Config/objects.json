@@ -1,0 +1,20 @@
+{
+  "tables": [
+    {
+      "name": "standard",
+      "friendlyName": "2-Turtle",
+      "dimensions": [ 4, 4 ],
+      "seats": [
+        {
+          "seatName": "standard",
+          "position": [ -2, 0 ]
+        }
+      ]
+    }
+  ],
+  "seats": [
+    {
+
+    }
+  ]
+}
