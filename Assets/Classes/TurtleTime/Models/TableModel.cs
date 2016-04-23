@@ -45,6 +45,8 @@ namespace TurtleTime
                     return "default";
                 }
             }
+
+            protected override int SortOrder { get { return Constants.SORT_LAYER_TABLE; } }
         }
     }
 }

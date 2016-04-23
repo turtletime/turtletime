@@ -23,7 +23,7 @@ namespace TurtleTime
             
             AddModel<CameraModel, CameraView>(ReadOnlyData.JsonData["cafe"]["camera"]);
             AddModel<MouseInputModel, MouseInputView>();
-            AddModel<RoomModel, RoomView>();
+            AddModel<RoomModel, RoomView>(ReadOnlyData.JsonData["cafe"]["room"]);
             // turtles
             AddModelCollection<TurtleModel, TurtleModel.View>();
             // queues and tables

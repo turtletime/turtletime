@@ -30,6 +30,8 @@ namespace TurtleTime
                 }
             }
 
+            protected override int SortOrder { get { return Constants.SORT_LAYER_SEAT; } }
+
             protected override void UpdateView()
             {
                 spriteRenderer.color = Model.Selected ? Color.red : Color.white;

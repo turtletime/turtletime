@@ -1,27 +1,15 @@
 {
   "camera": {
-    "position": [4, 16, 18],
-    "rotation": [45, 180, 0],
-    "scale": [1, 1, 1],
+    "position": [ 4, 16, 18 ],
+    "rotation": [ 45, 180, 0 ],
+    "scale": [ 1, 1, 1 ],
     "projection": "orthographic"
   },
+  "room": {
+    "width": 40,
+    "height": 20
+  },
   "tables": [
-    {
-      "position": [ 10, 4 ],
-      "id": "table_standard",
-      "seats": [
-        {
-          "seatID": "chair_standard",
-          "position": [ -3, 0 ],
-          "direction": [ 1, 0 ]
-        },
-        {
-          "seatID": "chair_standard",
-          "position": [ 3, 0 ],
-          "direction": [ -1, 0 ]
-        }
-      ]
-    },
     {
       "position": [ 10, 10 ],
       "id": "table_standard",
@@ -55,7 +43,7 @@
       ]
     },
     {
-      "position": [ 16, 10 ],
+      "position": [ 22, 16 ],
       "id": "table_standard",
       "seats": [
         {
@@ -73,27 +61,27 @@
   ],
   "queueSeats": [
     {
-      "position": [ 2, 0 ],
+      "position": [ 2, 1 ],
       "direction": [ 0, 1 ],
       "seatID": "chair_standard"
     },
     {
-      "position": [ 4, 0 ],
+      "position": [ 4, 1 ],
       "direction": [ 0, 1 ],
       "seatID": "chair_standard"
     },
     {
-      "position": [ 6, 0 ],
+      "position": [ 6, 1 ],
       "direction": [ 0, 1 ],
       "seatID": "chair_standard"
     },
     {
-      "position": [ 8, 0 ],
+      "position": [ 8, 1 ],
       "direction": [ 0, 1 ],
       "seatID": "chair_standard"
     },
     {
-      "position": [ 10, 0 ],
+      "position": [ 10, 1 ],
       "direction": [ 0, 1 ],
       "seatID": "chair_standard"
     }

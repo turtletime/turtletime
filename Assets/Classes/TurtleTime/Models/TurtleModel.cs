@@ -53,6 +53,8 @@ namespace TurtleTime
                 base.UpdateView();
             }
 
+            protected override int SortOrder { get { return Constants.SORT_LAYER_TURTLE; } }
+
             protected override string CurrentAnimation
             {
                 get

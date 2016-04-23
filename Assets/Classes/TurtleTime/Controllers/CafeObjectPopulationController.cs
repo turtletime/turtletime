@@ -25,6 +25,15 @@ namespace TurtleTime
                     Seats.AddRange(table.Seats);
                 }
                 Seats.AddRange(Queue.Seats);
+                // Add seats and tables to world
+                foreach (var table in Tables)
+                {
+                    Room.Models.Add(table);
+                }
+                foreach (var seat in Seats)
+                {
+                    Room.Models.Add(seat);
+                }
                 initialized = true;
             }
         }

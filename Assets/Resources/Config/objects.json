@@ -2,7 +2,8 @@
   "turtles": [
     {
       "id": "turtle_1_no_materials",
-      "friendlyID": "Basic Turtle"
+      "friendlyID": "Basic Turtle",
+      "dimensions": [ 2, 2 ]
     }
   ],
   "tables": [

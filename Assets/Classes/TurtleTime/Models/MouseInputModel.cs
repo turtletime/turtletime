@@ -34,7 +34,7 @@ namespace TurtleTime
         private bool clickedThisFrame;
         private bool clickedLastFrame;
 
-        public bool Intersects(IPhysicalModel physicalModel)
+        public bool Intersects(WorldObjectModel physicalModel)
         {
             Plane p = new Plane(Vector3.up, 0);
             float enter;
@@ -42,8 +42,8 @@ namespace TurtleTime
             if (intersects)
             {
                 Vector3 entryPoint = TurtleUtils.WorldSpacePointToCafeCoordinates(WorldSpaceRay.GetPoint(enter));
-                intersects = intersects && Math.Abs(entryPoint.x - physicalModel.Position.x) < 0.5f;
-                intersects = intersects && Math.Abs(entryPoint.y - physicalModel.Position.y) < 0.5f;
+                intersects = intersects && Math.Abs(entryPoint.x - physicalModel.Position.x) < physicalModel.Width / 2f;
+                intersects = intersects && Math.Abs(entryPoint.y - physicalModel.Position.y) < physicalModel.Height / 2f;
             }
             return intersects;
         }

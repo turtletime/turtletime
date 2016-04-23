@@ -64,7 +64,7 @@ namespace TurtleTime
         protected override void Load()
         {
             mainCamera = GameObject.Find("Camera").GetComponent<Camera>();
-            offset = TurtleUtils.CafeSpaceToWorldCoordinates(new Vector2(-1, 0));
+            offset = TurtleUtils.CafeSpaceToWorldCoordinates(new Vector2(-2, 0));
             // Load animation data
             IJsonObject globalSpriteData = ReadOnlyData.JsonData["sprites"];
             IJsonObject mySpriteData = globalSpriteData["sprites"][Model.SpriteReferenceTag];
@@ -105,6 +105,7 @@ namespace TurtleTime
             sprites = new List<Sprite>();
             sprites.AddRange(Resources.LoadAll<Sprite>("Sprites/" + resourceName));
             spriteRenderer.sprite = sprites[currentAnimationFrame];
+            spriteRenderer.sortingOrder = SortOrder;
         }
 
         public Sprite[] asdf(String s)
@@ -136,6 +137,7 @@ namespace TurtleTime
         }
 
         protected abstract String CurrentAnimation { get; }
+        protected abstract int SortOrder { get; }
         // protected abstract bool FlipX { get; }
     }
 }

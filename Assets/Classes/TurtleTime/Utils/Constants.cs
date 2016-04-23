@@ -10,9 +10,8 @@ namespace TurtleTime
     /// </summary>
     static class Constants
     {
-        public const float PARTICLE_RADIUS = 0.03f;
-        public static StringCollection STRINGS = new StringCollection("strings.txt");
-        public static bool DEBUG_MODE = true;
-        public const float PIXELS_PER_UNIT = 100.0f;
+        public const int SORT_LAYER_SEAT = 0;
+        public const int SORT_LAYER_TABLE = 1;
+        public const int SORT_LAYER_TURTLE = 2;
     }
 }

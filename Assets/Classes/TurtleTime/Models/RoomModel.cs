@@ -11,7 +11,12 @@ namespace TurtleTime
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        List<WorldObjectModel> models = new List<WorldObjectModel>();
+        public List<WorldObjectModel> Models { get; private set; }
+
+        public RoomModel()
+        {
+            Models = new List<WorldObjectModel>();
+        }
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {
@@ -23,15 +28,15 @@ namespace TurtleTime
         public WorldObjectModel GetModelAtLocation(int x, int y)
         {
             // TODO: Highly inefficient
-            foreach (WorldObjectModel model in models)
+            foreach (WorldObjectModel model in Models)
             {
                 int modelX = (int)Math.Round(model.Position.x);
-                int modelY = (int)Math.Round(model.Position.x);
+                int modelY = (int)Math.Round(model.Position.y);
                 bool result = true;
-                result = result && x <= modelX + model.Width / 2;
                 result = result && x >= modelX - model.Width / 2;
-                result = result && y <= modelY + model.Height / 2;
+                result = result && x < modelX + model.Width / 2;
                 result = result && y >= modelY - model.Height / 2;
+                result = result && y < modelY + model.Height / 2;
                 if (result)
                 {
                     return model;
