@@ -20,8 +20,7 @@ namespace TurtleTime
             GameObject.Find("UI").GetComponent<Canvas>().renderMode = RenderMode.ScreenSpaceOverlay;
 
             /* Models */
-
-            AddModel<TurtleDatabaseModel>(ReadOnlyData.JsonData["turtles"]["turtles"]);
+            
             AddModel<CameraModel, CameraView>(ReadOnlyData.JsonData["cafe"]["camera"]);
             AddModel<MouseInputModel, MouseInputView>();
             AddModel<RoomModel, RoomView>();
@@ -29,33 +28,27 @@ namespace TurtleTime
             AddModelCollection<TurtleModel, TurtleModel.View>();
             // queues and tables
             AddModelCollection<TableModel, TableModel.View>(ReadOnlyData.JsonData["cafe"]["tables"]);
-            AddModel<QueueModel>(ReadOnlyData.JsonData["cafe"]["queue"]);
+            AddModel<QueueModel>(ReadOnlyData.JsonData["cafe"]["queueSeats"]);
             // seats
             AddModelCollection<SeatModel, SeatModel.View>();
             AddModel<TurtleActionModel>();
-            AddModel<SeatCollectionModel>();
-            GetModel<SeatCollectionModel>().Seats = GetModelCollection<SeatModel>();
-            GetModel<SeatCollectionModel>().Initialize(GetModel<QueueModel>(), GetModelCollection<TableModel>());
             // ui stuff
             AddModel<TurtleTimeUIModel, UIView>(ReadOnlyData.JsonData["ui"]["turtleProfile"]);
 
             /* Controllers */
 
-            AddController(new InitializationController()
+            AddController(new CafeObjectPopulationController()
             {
                 Room = GetModel<RoomModel>(),
-                SeatCollection = GetModel<SeatCollectionModel>(),
                 Queue = GetModel<QueueModel>(),
-                Turtles = GetModelCollection<TurtleModel>(),
                 Tables = GetModelCollection<TableModel>(),
                 Seats = GetModelCollection<SeatModel>()
             });
             AddController(new CameraController() { CameraModel = GetModel<CameraModel>() });
             AddController(new TurtleSpawnController()
             {
-                TurtleModels = GetModelCollection<TurtleModel>(),
-                SeatsModel = GetModel<SeatCollectionModel>(),
-                TurtleDatabaseModel = GetModel<TurtleDatabaseModel>()
+                Turtles = GetModelCollection<TurtleModel>(),
+                Queue = GetModel<QueueModel>()
             });
             AddController(new InputController() { MouseRayModel = GetModel<MouseInputModel>() });
             AddController(new TurtleController()

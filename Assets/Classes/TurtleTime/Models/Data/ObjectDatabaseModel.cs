@@ -5,8 +5,28 @@ using System.Collections.Generic;
 
 namespace TurtleTime
 {
+    /// <summary>
+    /// A persistent model that stores all static information about objects (i.e. information that
+    /// never changes).
+    /// </summary>
     class ObjectDatabaseModel : Model
     {
+        private static ObjectDatabaseModel _instance;
+        public static ObjectDatabaseModel Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new ObjectDatabaseModel();
+                    _instance.LoadFromJson(ReadOnlyData.JsonData["objects"]);
+                }
+                return _instance;
+            }
+        }
+
+        public ObjectDataModel this[String s] { get { return ObjectData[s]; } }
+
         public Dictionary<String, ObjectDataModel> ObjectData { get; private set; }
 
         public ObjectDatabaseModel()
@@ -16,23 +36,29 @@ namespace TurtleTime
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {
+            foreach (IJsonObject child in jsonNode["turtles"].AsList)
+            {
+                var obj = new TurtleDataModel();
+                obj.LoadFromJson(child);
+                ObjectData.Add(obj.ID, obj);
+            }
             foreach (IJsonObject child in jsonNode["tables"].AsList)
             {
-                ObjectDataModel obj = new TableDataModel();
+                var obj = new TableDataModel();
                 obj.LoadFromJson(child);
-                ObjectData.Add(obj.Name, obj);
+                ObjectData.Add(obj.ID, obj);
             }
             foreach (IJsonObject child in jsonNode["seats"].AsList)
             {
-                ObjectDataModel obj = new SeatDataModel();
+                var obj = new SeatDataModel();
                 obj.LoadFromJson(child);
-                ObjectData.Add(obj.Name, obj);
+                ObjectData.Add(obj.ID, obj);
             }
             foreach (IJsonObject child in jsonNode["decorations"].AsList)
             {
-                ObjectDataModel obj = new DecorationDataModel();
+                var obj = new DecorationDataModel();
                 obj.LoadFromJson(child);
-                ObjectData.Add(obj.Name, obj);
+                ObjectData.Add(obj.ID, obj);
             }
         }
     }

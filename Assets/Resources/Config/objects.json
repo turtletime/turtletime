@@ -1,20 +1,24 @@
 {
+  "turtles": [
+    {
+      "id": "turtle_1_no_materials",
+      "friendlyID": "Basic Turtle"
+    }
+  ],
   "tables": [
     {
-      "name": "standard",
-      "friendlyName": "2-Turtle",
-      "dimensions": [ 4, 4 ],
-      "seats": [
-        {
-          "seatName": "standard",
-          "position": [ -2, 0 ]
-        }
-      ]
+      "id": "table_standard",
+      "friendlyID": "2-Turtle Table",
+      "dimensions": [ 4, 4 ]
     }
   ],
   "seats": [
     {
-
+      "id": "chair_standard",
+      "friendlyID": "Standard Chair",
+      "dimensions": [ 2, 2 ]
     }
-  ]
+  ],
+  "decorations": [ ],
+  "food": [ ]
 }

@@ -8,9 +8,8 @@ namespace TurtleTime
 {
     class TurtleSpawnController : Controller
     {
-        public ModelCollection<TurtleModel> TurtleModels { get; set; }
-        public SeatCollectionModel SeatsModel { get; set; }
-        public TurtleDatabaseModel TurtleDatabaseModel { get; set; }
+        public ModelCollection<TurtleModel> Turtles { get; set; }
+        public QueueModel Queue { get; set; }
 
         public static int SPAWN_INTERVAL_SECONDS = 2;
 
@@ -22,15 +21,27 @@ namespace TurtleTime
             if (timeSinceLastSpawn > SPAWN_INTERVAL_SECONDS)
             {
                 timeSinceLastSpawn -= SPAWN_INTERVAL_SECONDS;
-                SeatModel assignedSeat = SeatsModel.GetFreeQueueSeat();
+                SeatModel assignedSeat = GetFreeQueueSeat();
                 if (assignedSeat != null)
                 {
                     // Spawn turtle
-                    TurtleModel newTurtle = new TurtleModel() { StaticData = TurtleDatabaseModel.TurtleData["turtle_1_no_materials"] };
-                    TurtleModels.Add(newTurtle);
+                    TurtleModel newTurtle = new TurtleModel() { StaticData = ObjectDatabaseModel.Instance["turtle_1_no_materials"] };
+                    Turtles.Add(newTurtle);
                     TurtleModel.AssignTurtleToSeat(newTurtle, assignedSeat);
                 }
             }
+        }
+
+        private SeatModel GetFreeQueueSeat()
+        {
+            foreach (var seat in Queue.Seats)
+            {
+                if (!seat.Taken)
+                {
+                    return seat;
+                }
+            }
+            return null;
         }
     }
 }

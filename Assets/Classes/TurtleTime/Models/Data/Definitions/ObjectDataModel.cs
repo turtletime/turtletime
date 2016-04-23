@@ -13,11 +13,11 @@ namespace TurtleTime
         /// <summary>
         /// The name of this object, for asset loading and referencing.
         /// </summary>
-        public string Name { get; protected set; }
+        public string ID { get; protected set; }
         /// <summary>
         /// The friendly name of this object, for UI purposes.
         /// </summary>
-        public string FriendlyName { get; protected set; }
+        public string FriendlyID { get; protected set; }
         /// <summary>
         /// The width of this object.
         /// </summary>
@@ -34,8 +34,8 @@ namespace TurtleTime
         
         public override void LoadFromJson(IJsonObject jsonNode)
         {
-            Name = jsonNode["name"].AsString;
-            FriendlyName = jsonNode["friendlyName"].AsString;
+            ID = jsonNode["id"].AsString;
+            FriendlyID = jsonNode["friendlyID"].AsString;
             if (jsonNode["dimensions"] != null)
             {
                 Width = jsonNode["dimensions"][0].AsInt;
@@ -82,39 +82,7 @@ namespace TurtleTime
     /// </summary>
     class TableDataModel : ObjectDataModel
     {
-        public List<TableDataSeatReferenceModel> Seats { get; private set; }
-
         public override ObjectDataType DataType { get { return ObjectDataType.TABLE; } }
-
-        public TableDataModel()
-        {
-            Seats = new List<TableDataSeatReferenceModel>();
-        }
-
-        public override void LoadFromJson(IJsonObject jsonNode)
-        {
-            foreach (var seatJson in jsonNode["seats"].AsList)
-            {
-                var seatModel = new TableDataSeatReferenceModel();
-                seatModel.LoadFromJson(seatJson);
-                
-            }
-            base.LoadFromJson(jsonNode);
-        }
-
-        public class TableDataSeatReferenceModel : Model
-        {
-            public string SeatName { get; private set; }
-            public int X { get; private set; }
-            public int Y { get; private set; }
-
-            public override void LoadFromJson(IJsonObject jsonNode)
-            {
-                SeatName = jsonNode["seatName"].AsString;
-                X = jsonNode["position"][0].AsInt;
-                Y = jsonNode["position"][1].AsInt;
-            }
-        }
     }
 
     /// <summary>

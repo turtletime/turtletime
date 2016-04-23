@@ -11,6 +11,12 @@ namespace TurtleTime
     {
         public override string SpriteReferenceTag { get { return "chair"; } }
 
+        public override void LoadFromJson(IJsonObject jsonNode)
+        {
+            base.LoadFromJson(jsonNode);
+            StaticData = ObjectDatabaseModel.Instance[jsonNode["id"].AsString];
+        }
+
         public bool Taken { get; set; }
         public bool Selected { get; set; }
 

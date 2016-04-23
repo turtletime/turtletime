@@ -3,14 +3,16 @@ using UnityMVC;
 
 namespace TurtleTime
 {
-    class InitializationController : Controller
+    /// <summary>
+    /// Populates the cafe with chairs and tables.
+    /// Runs once.
+    /// </summary>
+    class CafeObjectPopulationController : Controller
     {
         public RoomModel Room { get; set; }
-        public SeatCollectionModel SeatCollection { get; set; }
         public QueueModel Queue { get; set; }
         public ModelCollection<SeatModel> Seats { get; set; }
         public ModelCollection<TableModel> Tables { get; set; }
-        public ModelCollection<TurtleModel> Turtles { get; set; }
 
         bool initialized = false;
 
@@ -18,7 +20,11 @@ namespace TurtleTime
         {
             if (!initialized)
             {
-
+                foreach (var table in Tables)
+                {
+                    Seats.AddRange(table.Seats);
+                }
+                Seats.AddRange(Queue.Seats);
                 initialized = true;
             }
         }

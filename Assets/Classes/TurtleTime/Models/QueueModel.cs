@@ -1,21 +1,31 @@
-﻿using UnityMVC;
+﻿using System.Collections.Generic;
+using UnityMVC;
 using UnityEngine;
 
 namespace TurtleTime
 {
     class QueueModel : Model
     {
-        public Vector2 Position { get; set; }
-        public Vector2 SeatExtensionDirection { get; set; }
-        public Vector2 FacingDirection { get; set; }
-        public int NumSeats { get; set; }
+        public List<SeatModel> Seats { get; private set; }
+
+        public QueueModel()
+        {
+            Seats = new List<SeatModel>();
+        }
 
         public override void LoadFromJson(IJsonObject jsonNode)
         {
-            Position = new Vector2(jsonNode["position"][0].AsInt, jsonNode["position"][1].AsInt);
-            SeatExtensionDirection = new Vector2(jsonNode["direction"][0].AsInt, jsonNode["direction"][1].AsInt);
-            FacingDirection = new Vector2(jsonNode["facing"][0].AsInt, jsonNode["facing"][1].AsInt);
-            NumSeats = jsonNode["numSeats"].AsInt;
+            foreach (var seatJSON in jsonNode.AsList)
+            {
+                Vector2 position = new Vector2(seatJSON["position"][0].AsInt, seatJSON["position"][1].AsInt);
+                Vector2 direction = new Vector2(seatJSON["direction"][0].AsInt, seatJSON["direction"][1].AsInt);
+                Seats.Add(new SeatModel()
+                {
+                    Position = position,
+                    Direction = direction,
+                    StaticData = ObjectDatabaseModel.Instance[seatJSON["seatID"].AsString]
+                });
+            }
         }
     }
 }

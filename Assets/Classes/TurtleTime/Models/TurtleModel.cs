@@ -14,7 +14,6 @@ namespace TurtleTime
 
         private SeatModel targetSeat;
 
-        public TurtleDataModel StaticData { get; set; }
         public float ProgressToTargetSeat { get; set; }
         public bool Selected { get; set; }
 
