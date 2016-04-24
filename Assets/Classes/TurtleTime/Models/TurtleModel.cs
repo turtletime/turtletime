@@ -14,7 +14,7 @@ namespace TurtleTime
 
         private SeatModel targetSeat;
 
-        public float ProgressToTargetSeat { get; set; }
+        public Vector2 TargetPosition { get; set; }
         public bool Selected { get; set; }
 
         public SeatModel TargetSeat
@@ -25,7 +25,6 @@ namespace TurtleTime
             }
             protected set
             {
-                ProgressToTargetSeat = 0;
                 targetSeat = value;
             }
         }
@@ -40,7 +39,6 @@ namespace TurtleTime
                     oldSeat.Taken = false;
                 }
                 turtleModel.TargetSeat = seatModel;
-                turtleModel.Direction = seatModel.Direction;
                 seatModel.Taken = true;
             }
         }
@@ -53,7 +51,7 @@ namespace TurtleTime
                 base.UpdateView();
             }
 
-            protected override int SortOrder { get { return Constants.SORT_LAYER_TURTLE; } }
+            protected override int SortOrder { get { return Constants.LAYER_TURTLE; } }
 
             protected override string CurrentAnimation
             {

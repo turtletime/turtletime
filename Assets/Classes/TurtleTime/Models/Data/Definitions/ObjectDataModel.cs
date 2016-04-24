@@ -90,6 +90,17 @@ namespace TurtleTime
     /// </summary>
     class TurtleDataModel : ObjectDataModel
     {
+        public float Speed { get; private set; }
+
         public override ObjectDataType DataType { get { return ObjectDataType.TURTLE; } }
+
+        public override void LoadFromJson(IJsonObject jsonNode)
+        {
+            if (jsonNode["speed"] != null)
+            {
+                Speed = jsonNode["speed"].AsFloat;
+            }
+            base.LoadFromJson(jsonNode);
+        }
     }
 }

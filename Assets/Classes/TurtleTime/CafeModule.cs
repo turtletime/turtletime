@@ -53,6 +53,7 @@ namespace TurtleTime
             AddController(new InputController() { MouseRayModel = GetModel<MouseInputModel>() });
             AddController(new TurtleController()
             {
+                RoomModel = GetModel<RoomModel>(),
                 TurtleModels = GetModelCollection<TurtleModel>(),
                 MouseInputModel = GetModel<MouseInputModel>()
             });

@@ -105,7 +105,6 @@ namespace TurtleTime
             sprites = new List<Sprite>();
             sprites.AddRange(Resources.LoadAll<Sprite>("Sprites/" + resourceName));
             spriteRenderer.sprite = sprites[currentAnimationFrame];
-            spriteRenderer.sortingOrder = SortOrder;
         }
 
         public Sprite[] asdf(String s)
@@ -115,7 +114,7 @@ namespace TurtleTime
 
         protected override void UpdateView()
         {
-            transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position) + offset;
+            transform.position = TurtleUtils.CafeSpaceToWorldCoordinates(Model.Position) + offset + new Vector3(0, 0, 0.001f * SortOrder);
             transform.rotation = mainCamera.transform.rotation;
             timer++;
             if (timer == currentAnimationRange.FrameDuration)

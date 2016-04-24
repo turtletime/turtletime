@@ -10,8 +10,8 @@ namespace TurtleTime
     /// </summary>
     static class Constants
     {
-        public const int SORT_LAYER_SEAT = 0;
-        public const int SORT_LAYER_TABLE = 1;
-        public const int SORT_LAYER_TURTLE = 2;
+        public const int LAYER_SEAT = 0;
+        public const int LAYER_TABLE = 1;
+        public const int LAYER_TURTLE = 2;
     }
 }

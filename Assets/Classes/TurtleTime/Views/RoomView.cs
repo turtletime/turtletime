@@ -52,7 +52,7 @@ namespace TurtleTime
             foreach (var tile in tiles)
             {
                 tile.Tile.GetComponent<MeshRenderer>().material.color =
-                    Color.Lerp(Model.GetModelAtLocation(tile.X, tile.Y) != null ? Color.red : Color.blue, Color.white, 0.5f);
+                    Color.Lerp(Model.GetModelAtLocation(new Vector2(tile.X, tile.Y)) != null ? Color.red : Color.blue, Color.white, 0.5f);
             }
         }
     }

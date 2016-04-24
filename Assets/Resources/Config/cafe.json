@@ -6,13 +6,12 @@
     "projection": "orthographic"
   },
   "room": {
-    "width": 40,
-    "height": 20
+    "dimensions": [ 40, 20 ]
   },
   "tables": [
     {
       "position": [ 10, 10 ],
-      "id": "table_standard",
+      "tableID": "table_standard",
       "seats": [
         {
           "seatID": "chair_standard",
@@ -28,7 +27,7 @@
     },
     {
       "position": [ 10, 16 ],
-      "id": "table_standard",
+      "tableID": "table_standard",
       "seats": [
         {
           "seatID": "chair_standard",
@@ -44,7 +43,7 @@
     },
     {
       "position": [ 22, 16 ],
-      "id": "table_standard",
+      "tableID": "table_standard",
       "seats": [
         {
           "seatID": "chair_standard",

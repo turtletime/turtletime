@@ -22,7 +22,7 @@ namespace TurtleTime
         {
             base.LoadFromJson(jsonNode);
             Position = new Vector2(jsonNode["position"][0].AsInt, jsonNode["position"][1].AsInt);
-            StaticData = ObjectDatabaseModel.Instance[jsonNode["id"].AsString];
+            StaticData = ObjectDatabaseModel.Instance[jsonNode["tableID"].AsString];
             foreach (var seatJSON in jsonNode["seats"].AsList)
             {
                 Vector2 position = new Vector2(seatJSON["position"][0].AsInt, seatJSON["position"][1].AsInt);
@@ -46,7 +46,7 @@ namespace TurtleTime
                 }
             }
 
-            protected override int SortOrder { get { return Constants.SORT_LAYER_TABLE; } }
+            protected override int SortOrder { get { return Constants.LAYER_TABLE; } }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace TurtleTime
                 }
             }
 
-            protected override int SortOrder { get { return Constants.SORT_LAYER_SEAT; } }
+            protected override int SortOrder { get { return Constants.LAYER_SEAT; } }
 
             protected override void UpdateView()
             {
